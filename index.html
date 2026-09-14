@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Entrenador personal online. Entrena la mitad, consigue el doble: musculo con evidencia para gente sin tiempo. Plan hecho a mano por Samuel Rodriguez Baudru, graduado en Ciencias de la Actividad Fisica y el Deporte. Entrenes donde entrenes.">
+<meta name="theme-color" content="#0D0D0D">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="BAUTRUTHS">
+<meta property="og:url" content="https://bautruths.github.io/">
+<meta property="og:title" content="Entrena la mitad. Consigue el doble.">
+<meta property="og:description" content="Entrenador personal online. Musculo con evidencia, para gente sin tiempo. Cuentame tu caso en dos toques y te respondo yo.">
+<meta property="og:image" content="https://bautruths.github.io/portada.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Samuel Rodriguez Baudru, entrenador personal online BAUTRUTHS">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 88'%3E%3Cpath d='M50 6 96 84H4Z' fill='none' stroke='%23B87333' stroke-width='9'/%3E%3Cpath d='M50 34 74 76H26Z' fill='none' stroke='%23B87333' stroke-width='8'/%3E%3C/svg%3E">
+
+<style>
+  html{color-scheme:light dark;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+
+<title>Entrena con Bautruths</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300..600&display=swap">
+
+<style>
+/* ── BAUTRUTHS · negro y cobre. Dark-first: :root es el tema de marca. ── */
+:root{
+  --ground:#0D0D0D;
+  --surface:#16120E;
+  --surface-2:#1E1913;
+  --rule:#2C241C;
+  --rule-strong:#453729;
+  --copper:#B87333;
+  --copper-hi:#D89A5C;
+  --on-copper:#0D0D0D;
+  --text:#F2EBE0;
+  --muted:#9C8F80;
+  --bar:rgba(13,13,13,.94);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --ground:#FAF6EF;
+    --surface:#FFFFFF;
+    --surface-2:#F3EDE3;
+    --rule:#E1D8C9;
+    --rule-strong:#C7B9A4;
+    --copper:#8A551F;
+    --copper-hi:#6D4116;
+    --on-copper:#FFF6E9;
+    --text:#17130F;
+    --muted:#6B6155;
+    --bar:rgba(250,246,239,.94);
+  }
+}
+:root[data-theme="light"]{
+  --ground:#FAF6EF;
+  --surface:#FFFFFF;
+  --surface-2:#F3EDE3;
+  --rule:#E1D8C9;
+  --rule-strong:#C7B9A4;
+  --copper:#8A551F;
+  --copper-hi:#6D4116;
+  --on-copper:#FFF6E9;
+  --text:#17130F;
+  --muted:#6B6155;
+  --bar:rgba(250,246,239,.94);
+}
+
+*{box-sizing:border-box}
+
+body{
+  background:var(--ground);
+  color:var(--text);
+  font-family:"Newsreader",Georgia,"Times New Roman",serif;
+  font-size:17px;
+  line-height:1.58;
+  padding-bottom:5.5rem;
+  -webkit-font-smoothing:antialiased;
+  /* Chrome en Android infla el texto pequeño por su cuenta y descuadra el bloque
+     de arriba. Esto lo desactiva y deja los tamaños que están escritos aquí. */
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+.wrap{width:min(100% - 2.25rem,33rem);margin-inline:auto}
+
+.tag{
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:.66rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ── Cabecera compacta ── */
+.top{display:flex;align-items:center;gap:.7rem;padding:1.3rem 0 1.1rem}
+.mark{display:block;width:29px;height:auto;color:var(--copper);flex:0 0 auto}
+/* La cara en la cabecera: lo primero que vende eres tú, no el logo */
+.cara{
+  display:block;flex:0 0 auto;
+  width:38px;height:38px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid var(--copper);
+}
+.wordmark{
+  font-family:"Archivo Black",Impact,sans-serif;
+  font-size:.88rem;letter-spacing:.26em;margin:0;line-height:1;
+}
+.online{
+  margin-left:auto;flex:0 0 auto;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:.6rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--copper);
+  border:1px solid var(--rule-strong);
+  border-radius:999px;padding:.26rem .58rem;
+  white-space:nowrap;
+}
+
+/* ── Tesis ── */
+.thesis{border-top:1px solid var(--rule-strong);padding:1.2rem 0 1.8rem}
+.thesis h1{
+  font-family:"Archivo Black",Impact,sans-serif;
+  font-size:clamp(2rem,9.5vw,2.85rem);
+  line-height:.99;letter-spacing:-.015em;margin:0;text-wrap:balance;
+}
+.thesis h1 .b{display:block;color:var(--copper)}
+.thesis p{margin:.8rem 0 0;color:var(--muted);font-size:1.02rem;max-width:33ch}
+
+/* ── Las dos preguntas, en fichas ── */
+.quiz{margin-top:1.05rem;display:flex;flex-direction:column;gap:.65rem}
+.quiz-hint{
+  margin:0;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:.72rem;letter-spacing:.04em;
+  color:var(--copper);
+}
+.qgroup{display:flex;flex-direction:column;gap:.45rem}
+.qlabel{margin:0;color:var(--copper)}
+.qlabel .mini{
+  font-weight:500;font-size:.62rem;letter-spacing:.03em;
+  text-transform:none;color:var(--muted);
+  margin-left:.4rem;white-space:nowrap;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:500;font-size:.85rem;
+  color:var(--text);
+  background:var(--surface);
+  border:1px solid var(--rule-strong);
+  border-radius:999px;
+  padding:.44rem .85rem;
+  cursor:pointer;
+  transition:background .15s ease,border-color .15s ease,color .15s ease;
+}
+.chip:hover{border-color:var(--copper)}
+.chip[aria-pressed="true"]{
+  background:var(--copper);
+  border-color:var(--copper);
+  color:var(--on-copper);
+  font-weight:600;
+}
+.chip[aria-pressed="true"]::before{content:"✓ "}
+
+/* Aviso de "esto se toca", solo hasta el primer toque */
+@keyframes latido{
+  0%,100%{box-shadow:0 0 0 0 rgba(184,115,51,0)}
+  50%{box-shadow:0 0 0 4px rgba(184,115,51,.25)}
+}
+.chips.avisa .chip{animation:latido 1.9s ease-in-out 3}
+.chips.avisa .chip:nth-child(2){animation-delay:.12s}
+.chips.avisa .chip:nth-child(3){animation-delay:.24s}
+.chips.avisa .chip:nth-child(4){animation-delay:.36s}
+
+/* ── Botón ── */
+.cta{
+  display:block;margin-top:1.1rem;
+  background:var(--copper);color:var(--on-copper);
+  font-family:"Archivo Black",Impact,sans-serif;
+  font-size:1.08rem;text-align:center;text-decoration:none;
+  padding:1.05rem .9rem;border:1px solid var(--copper);
+  transition:background .18s ease,transform .18s ease;
+}
+.cta:hover,.cta:focus-visible{background:var(--copper-hi);border-color:var(--copper-hi);transform:translateY(-2px)}
+.cta-note{
+  margin:.7rem 0 0;text-align:center;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:.77rem;color:var(--muted);
+}
+
+/* ── Franja de datos ── */
+.specs{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--rule-strong);
+  border-bottom:1px solid var(--rule-strong);
+}
+.spec{padding:1.05rem .5rem 1.15rem;text-align:center}
+.spec + .spec{border-left:1px solid var(--rule)}
+.spec b{
+  display:block;font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:1.25rem;
+  font-variant-numeric:tabular-nums;line-height:1.1;
+}
+.spec span{display:block;margin-top:.38rem;font-size:.6rem;line-height:1.35;letter-spacing:.11em}
+
+/* ── Cabecera de sección ── */
+.shead{display:flex;align-items:center;gap:.85rem;margin:2.6rem 0 1.4rem}
+.shead::after{content:"";flex:1;height:1px;background:var(--rule-strong)}
+.shead .tag{color:var(--copper);white-space:nowrap}
+
+/* ── Los tres pasos ── */
+.steps{list-style:none;margin:0;padding:0}
+.step{display:flex;gap:1.05rem;padding:1.05rem 0}
+.step + .step{border-top:1px solid var(--rule)}
+.step-n{
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:.8rem;
+  font-variant-numeric:tabular-nums;
+  color:var(--copper);padding-top:.3rem;flex:0 0 auto;
+}
+.step h3{font-family:"Archivo",system-ui,sans-serif;font-weight:600;font-size:1rem;margin:0 0 .22rem;color:var(--copper)}
+.step p{margin:0;color:var(--muted);font-size:.96rem}
+
+/* ── Quién soy ── */
+.bio{display:flex;flex-direction:column;gap:1.15rem}
+.bio-foto{
+  display:block;width:100%;height:auto;
+  aspect-ratio:4/5;object-fit:cover;object-position:center 16%;
+  border:1px solid var(--rule-strong);
+}
+.bio-texto p{margin:0;color:var(--muted);font-size:1rem}
+.bio-texto p + p{margin-top:.8rem}
+.bio-texto strong{color:var(--text);font-weight:600}
+.bio-firma{
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:.95rem;
+}
+.bio-texto p.bio-firma{color:var(--text);margin-top:1rem}
+@media (min-width:30rem){
+  .bio{flex-direction:row;gap:1.5rem;align-items:flex-start}
+  .bio-foto{width:42%;flex:0 0 auto}
+}
+
+/* ── Los tres "sin" ── */
+.thesis p.sin{
+  margin:.6rem 0 0;
+  max-width:none;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:.73rem;letter-spacing:.05em;line-height:1.5;
+  color:var(--copper);
+}
+
+/* ── Qué incluye ── */
+.incluye{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.incluye li{
+  display:flex;gap:.85rem;align-items:flex-start;
+  padding:.85rem 0;border-bottom:1px solid var(--rule);
+}
+.incluye li::before{
+  content:"";flex:0 0 auto;
+  width:7px;height:7px;margin-top:.55rem;
+  background:var(--copper);transform:rotate(45deg);
+}
+.incluye strong{
+  display:block;color:var(--copper);
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:.97rem;margin-bottom:.12rem;
+}
+.incluye span{color:var(--muted);font-size:.95rem}
+
+/* ── El espejo: "esto va contigo si" ── */
+.espejo{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.espejo li{
+  display:flex;gap:.9rem;align-items:flex-start;
+  padding:.9rem 0;border-bottom:1px solid var(--rule);
+  color:var(--text);font-size:1.01rem;
+}
+.espejo li::before{
+  content:"";flex:0 0 auto;
+  width:20px;height:2px;margin-top:.8rem;
+  background:var(--copper);
+}
+
+/* ── Mensajes de clientes ── */
+.pruebas-nota{
+  margin:0 0 .9rem;color:var(--muted);font-size:.93rem;
+}
+.pruebas{
+  display:flex;gap:.7rem;align-items:center;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:.7rem;
+  -webkit-overflow-scrolling:touch;
+}
+.pruebas img{
+  flex:0 0 auto;
+  width:min(76%,268px);height:auto;
+  border:1px solid var(--rule-strong);
+  border-radius:9px;
+  scroll-snap-align:start;
+  background:#111b21;
+}
+.desliza{
+  margin:.15rem 0 0;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:.68rem;letter-spacing:.05em;
+  color:var(--copper);
+}
+
+/* ── La app, dentro de "qué incluye" ── */
+.app-vista{margin-top:1.3rem;text-align:center}
+.app-vista img{
+  width:min(100%,238px);height:auto;
+  border:1px solid var(--rule-strong);
+  border-radius:12px;
+  background:#0b0b0b;
+}
+.app-vista figcaption{
+  margin-top:.6rem;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:.74rem;letter-spacing:.03em;
+  color:var(--muted);
+}
+
+/* ── Preguntas ── */
+.faq{border-top:1px solid var(--rule)}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{
+  list-style:none;cursor:pointer;
+  display:flex;gap:1rem;align-items:center;justify-content:space-between;
+  padding:.95rem 0;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:.96rem;
+  color:var(--copper);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";color:var(--copper);
+  font-size:1.25rem;line-height:1;flex:0 0 auto;
+}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0 0 1.05rem;color:var(--muted);font-size:.95rem}
+
+/* ── Método ── */
+.method{margin:0;border-top:1px solid var(--rule)}
+.row{
+  display:grid;grid-template-columns:7rem 1fr;gap:0 1rem;
+  padding:.9rem 0;border-bottom:1px solid var(--rule);align-items:baseline;
+}
+.row dt{padding-top:.14rem}
+.row dd{margin:0;font-size:.96rem;color:var(--muted)}
+
+/* ── Filtro ── */
+.filter{
+  margin-top:2.6rem;background:var(--surface);
+  border-left:3px solid var(--copper);
+  padding:1.25rem 1.25rem 1.35rem;
+}
+.filter h3{font-family:"Archivo",system-ui,sans-serif;font-weight:600;font-size:1rem;margin:0 0 .45rem;color:var(--copper)}
+.filter p{margin:0;color:var(--muted);font-size:.96rem}
+
+/* ── Otras puertas ── */
+.doors{display:flex;flex-direction:column;gap:.55rem}
+.door{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  background:var(--surface);border:1px solid var(--rule-strong);
+  padding:.9rem 1.05rem;text-decoration:none;color:var(--text);
+  transition:border-color .18s ease,background .18s ease;
+}
+.door:hover,.door:focus-visible{border-color:var(--copper);background:var(--surface-2)}
+.door strong{font-family:"Archivo",system-ui,sans-serif;font-weight:600;font-size:.96rem;display:block}
+.door em{display:block;font-style:normal;font-size:.84rem;color:var(--muted);margin-top:.1rem}
+.door .arw{color:var(--copper);font-family:"Archivo",system-ui,sans-serif;flex:0 0 auto}
+
+/* ── Cierre ── */
+.closing{margin-top:2.9rem;border-top:1px solid var(--rule-strong);padding-top:2rem}
+.closing-title{
+  font-family:"Archivo Black",Impact,sans-serif;
+  font-size:clamp(1.45rem,6.2vw,1.9rem);
+  line-height:1.06;margin:0 0 1.3rem;text-wrap:balance;
+}
+
+footer{
+  margin-top:2.9rem;border-top:1px solid var(--rule);
+  padding:1.5rem 0 1rem;color:var(--muted);font-size:.84rem;
+}
+footer p{margin:0 0 .4rem}
+footer a{color:var(--copper);text-decoration:none;border-bottom:1px solid var(--rule-strong)}
+footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
+
+/* ── Barra fija ── */
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:var(--bar);backdrop-filter:blur(10px);
+  border-top:1px solid var(--rule-strong);
+  padding:.7rem 0 max(.7rem,env(safe-area-inset-bottom));
+  transform:translateY(110%);
+  transition:transform .28s cubic-bezier(.22,.68,.36,1);
+}
+.sticky.on{transform:none}
+.sticky .cta{margin-top:0;font-size:.98rem;padding:.85rem .9rem}
+
+:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
+
+@media (max-width:30rem){
+  .row{grid-template-columns:1fr;gap:.28rem 0;padding:.95rem 0}
+  .row dt{padding-top:0}
+  .spec{padding:.95rem .35rem 1.05rem}
+  .spec b{font-size:1.15rem}
+  .spec span{font-size:.57rem;letter-spacing:.09em}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cta,.sticky,.chip{transition:none}
+  .cta:hover{transform:none}
+  .chips.avisa .chip{animation:none}
+}
+</style>
+
+</head>
+<body>
+
+<main class="wrap">
+
+  <header class="top">
+    <img class="cara" src="cara.jpg" width="240" height="240"
+         alt="Samuel Rodríguez Baudru, entrenador personal online">
+    <p class="wordmark">BAUTRUTHS</p>
+    <span class="online">Entrenador online</span>
+  </header>
+
+  <section class="thesis">
+    <h1>Entrena la mitad.<span class="b">Consigue el doble.</span></h1>
+    <p>Músculo con evidencia, para gente sin tiempo. Entreno online, uno a uno, entrenes donde entrenes.</p>
+    <p class="sin">Sin vivir en el gimnasio · Sin rutinas copiadas · Sin entrenar a ciegas</p>
+
+    <div class="quiz">
+      <p class="quiz-hint">↓ Toca para elegir</p>
+      <div class="qgroup">
+        <p class="qlabel tag" id="lbl-objetivo">Qué buscas <span class="mini">marca las que quieras</span></p>
+        <div class="chips avisa" role="group" aria-labelledby="lbl-objetivo" data-grupo="objetivo" data-multiple="true">
+          <button type="button" class="chip" aria-pressed="false" data-v="ganar masa muscular">Ganar músculo</button>
+          <button type="button" class="chip" aria-pressed="false" data-v="perder grasa">Perder grasa</button>
+          <button type="button" class="chip" aria-pressed="false" data-v="mejorar mi rendimiento">Rendimiento</button>
+          <button type="button" class="chip" aria-pressed="false" data-v="aún no lo tengo claro">Aún no lo sé</button>
+        </div>
+      </div>
+      <div class="qgroup">
+        <p class="qlabel tag" id="lbl-tiempo">Tiempo a la semana</p>
+        <div class="chips avisa" role="group" aria-labelledby="lbl-tiempo" data-grupo="tiempo">
+          <button type="button" class="chip" aria-pressed="false" data-v="menos de 2 h">Menos de 2 h</button>
+          <button type="button" class="chip" aria-pressed="false" data-v="entre 2 y 4 h">2 – 4 h</button>
+          <button type="button" class="chip" aria-pressed="false" data-v="más de 4 h">Más de 4 h</button>
+        </div>
+      </div>
+    </div>
+
+    <a class="cta" id="cta-top" data-wa href="#">ESCRÍBEME POR WHATSAPP</a>
+    <p class="cta-note">Se abre tu WhatsApp con el mensaje ya escrito. Solo dale a enviar.</p>
+  </section>
+
+  <section class="specs">
+    <div class="spec"><b>+100</b><span class="tag">Casos<br>de éxito</span></div>
+    <div class="spec"><b>180</b><span class="tag">Ejercicios<br>en tu plan</span></div>
+    <div class="spec"><b>134</b><span class="tag">Con vídeo<br>propio</span></div>
+  </section>
+
+  <h2 class="shead"><span class="tag">Qué pasa cuando me escribes</span></h2>
+  <ol class="steps">
+    <li class="step">
+      <span class="step-n">01</span>
+      <div>
+        <h3>Le das a enviar</h3>
+        <p>El mensaje va escrito con lo que has marcado arriba. No tienes que redactar nada.</p>
+      </div>
+    </li>
+    <li class="step">
+      <span class="step-n">02</span>
+      <div>
+        <h3>Te contesto yo</h3>
+        <p>No un bot ni un comercial. Miro tu caso y te digo qué haría en tu situación, entrenes conmigo o no.</p>
+      </div>
+    </li>
+    <li class="step">
+      <span class="step-n">03</span>
+      <div>
+        <h3>Decides tú</h3>
+        <p>Si encajamos, montamos tu plan y empiezas. Si no, te quedas con la respuesta igual. Sin insistir.</p>
+      </div>
+    </li>
+  </ol>
+
+  <h2 class="shead"><span class="tag">Quién te va a contestar</span></h2>
+  <div class="bio">
+    <img class="bio-foto" src="samuel.jpg" width="1179" height="1572" loading="lazy"
+         alt="Samuel Rodríguez Baudru en el gimnasio, con la camiseta de BAUTRUTHS">
+    <div class="bio-texto">
+      <p>Me llamo <strong>Samuel Rodríguez Baudru</strong>. Soy graduado en Ciencias de la Actividad Física y el Deporte, y entreno online a gente que no vive en el gimnasio.</p>
+      <p>Del deporte siempre me ha enganchado una cosa por encima de todas: ver cómo alguien mejora poco a poco. No el día que levanta mucho, sino las semanas que hay detrás.</p>
+      <p>Empecé readaptando lesiones y preparando atletas — tenis, fútbol, pádel, deportes de contacto. De ahí pasé al entrenamiento personal y me quedé, porque cambiarle a alguien la salud y la actitud engancha más que cualquier marca.</p>
+      <p>Lo que no soporto del sector es la cantidad de rutinas que se hacen «porque funcionan», sin que nadie sepa explicar por qué. Todo tiene una explicación y yo soy de los que necesitan encontrarla. De ahí viene lo de músculo con evidencia: no es un eslogan, es que no sé trabajar de otra manera.</p>
+      <p class="bio-firma">Cuando escribas, te contesto yo. No hay nadie más.</p>
+    </div>
+  </div>
+
+  <h2 class="shead"><span class="tag">Qué incluye entrenar conmigo</span></h2>
+  <ul class="incluye">
+    <li><span><strong>Tu plan, hecho a mano</strong>Lo monto yo mirando tu objetivo, tu nivel y los días que puedes de verdad. No sale de ninguna plantilla.</span></li>
+    <li><span><strong>Progresión e intensidad marcadas</strong>Cargas y repeticiones planificadas semana a semana, y el RIR de cada serie: sabes cuánto apretar sin quedarte corto ni pasarte.</span></li>
+    <li><span><strong>Cada ejercicio con mi vídeo</strong>No uno genérico de internet: el mío, explicando cómo se hace y los fallos que comete casi todo el mundo.</span></li>
+    <li><span><strong>Tu app en el móvil</strong>El plan de la semana, los vídeos y el registro, en un solo sitio. Lo abres en el gimnasio y sabes exactamente qué toca.</span></li>
+    <li><span><strong>Yo reviso lo que registras</strong>Apuntas tus series y miro si la progresión avanza. Si se atasca, cambio el plan. Ese es el trabajo.</span></li>
+    <li><span><strong>WhatsApp directo conmigo</strong>Me escribes a mí. No a un ayudante, no a un bot, no a un formulario.</span></li>
+  </ul>
+
+  <figure class="app-vista">
+    <img src="app.jpg" width="620" height="1216" loading="lazy"
+         alt="La app de BAUTRUTHS: el entrenamiento del día con series, repeticiones, descansos y los pesos registrados">
+    <figcaption>Así ves tu semana. Cada ejercicio con su vídeo y tus series apuntadas.</figcaption>
+  </figure>
+
+  <h2 class="shead"><span class="tag">Esto va contigo si</span></h2>
+  <ul class="espejo">
+    <li>Tienes trabajo y tienes vida, y el gimnasio es lo primero que cae cuando la semana se complica.</li>
+    <li>No quieres vivir en el gimnasio. Quieres entrenar bien y punto.</li>
+    <li>Tu rutina la sacaste de alguien del gym, de un vídeo o de una IA.</li>
+    <li>No sabes si estás progresando o simplemente estás estancado.</li>
+    <li>No tienes ni idea de hacer los ejercicios ni de por dónde empezar.</li>
+  </ul>
+
+  <section class="filter">
+    <h3>No trabajo con todo el mundo</h3>
+    <p>Si buscas perder diez kilos en un mes o un PDF genérico, no soy tu entrenador. Si quieres construir músculo con cabeza, entrenando menos horas de las que crees, encajamos.</p>
+  </section>
+
+  <h2 class="shead"><span class="tag">Lo que me preguntáis siempre</span></h2>
+  <div class="faq">
+    <details>
+      <summary>No tengo tiempo</summary>
+      <p>Es justo la gente con la que trabajo. El plan se hace sobre los días que tienes de verdad, no sobre los que te gustaría tener. Con dos o tres sesiones bien planteadas se avanza; con cinco mal aprovechadas, no. De ahí viene lo de entrenar la mitad.</p>
+    </details>
+    <details>
+      <summary>¿Dónde entreno? ¿Tengo que ir a tu gimnasio?</summary>
+      <p>No. Entrenas en el gimnasio que ya tengas, o en el que te pille cerca. Yo trabajo 100% online: te monto el plan según las máquinas que tengas disponibles, lo llevas en la app con los vídeos, y hablamos por WhatsApp. Vivas donde vivas.</p>
+    </details>
+    <details>
+      <summary>No sé hacer bien los ejercicios</summary>
+      <p>Cada ejercicio de tu plan lleva mi vídeo explicándolo, con los fallos típicos avisados antes de que los cometas. Y si dudas de algo, me grabas la serie y te digo qué corregir. Nadie empieza sabiendo.</p>
+    </details>
+    <details>
+      <summary>Me da miedo que no estés pendiente de mí</summary>
+      <p>Por eso registras tus series: no es burocracia, es lo que yo miro cada semana. Si algo lleva dos semanas sin moverse, lo veo antes que tú. Y me escribes directamente a mí por WhatsApp, no a un equipo de soporte.</p>
+    </details>
+    <details>
+      <summary>¿Voy a pasarlo mal?</summary>
+      <p>No. Ni sufrir en cada ejercicio, ni dos horas de gimnasio, ni salir arrastrándote de cada sesión. El RIR existe justo para eso: para que sepas cuánto apretar sin destrozarte. Si odias el proceso lo dejas en tres semanas, y entonces no sirve de nada.</p>
+    </details>
+  </div>
+
+  <h2 class="shead"><span class="tag">Lo que me dicen</span></h2>
+  <p class="pruebas-nota">Mensajes de clientes, tal cual me llegan. Sin nombres, por respeto a ellos.</p>
+  <div class="pruebas">
+    <img src="op1.jpg" width="720" height="390" loading="lazy" alt="Cliente: «muchísimas gracias tío, de verdad que sin ti dudo que lo hubiera conseguido»">
+    <img src="op2.jpg" width="720" height="382" loading="lazy" alt="Cliente: no ha tenido dudas con ningún ejercicio y está contento con el plan">
+    <img src="op3.jpg" width="720" height="509" loading="lazy" alt="Cliente: el nuevo entrenamiento de pierna le ha gustado mucho">
+    <img src="op4.jpg" width="720" height="612" loading="lazy" alt="Cliente: «me estás ayudando muchísimo»">
+    <img src="op5.jpg" width="720" height="535" loading="lazy" alt="Cliente valorando el entrenamiento con un 10 sobre 10">
+    <img src="op6.jpg" width="720" height="529" loading="lazy" alt="Clienta sorprendida con la aplicación">
+  </div>
+  <p class="desliza">→ Desliza para ver más</p>
+
+  <section class="closing">
+    <h2 class="closing-title">Un mensaje ahora te ahorra meses entrenando a ciegas.</h2>
+    <a class="cta" id="cta-end" style="margin-top:0" data-wa href="#">ESCRÍBEME POR WHATSAPP</a>
+    <p class="cta-note">Sin pagar nada · sin compromiso</p>
+
+    <h2 class="shead"><span class="tag">Si prefieres otra vía</span></h2>
+    <div class="doors">
+      <a class="door" href="https://ig.me/m/bautruths">
+        <span><strong>Mensaje por Instagram</strong><em>Te contesto yo en @bautruths</em></span>
+        <span class="arw">→</span>
+      </a>
+      <a class="door" href="https://form.jotform.com/261962263461358">
+        <span><strong>Dejarme tus datos en un formulario</strong><em>Si no quieres escribir por WhatsApp</em></span>
+        <span class="arw">→</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>BAUTRUTHS · Samuel Rodríguez Baudru</p>
+    <p>Entrenador personal · Graduado en Ciencias de la Actividad Física y el Deporte</p>
+    <p style="margin-top:.9rem">¿Ya entrenas conmigo? Tienes tu app en el enlace que te pasé por WhatsApp.</p>
+  </footer>
+
+</main>
+
+<div class="sticky" id="sticky">
+  <div class="wrap">
+    <a class="cta" data-wa href="#">ESCRÍBEME POR WHATSAPP</a>
+  </div>
+</div>
+
+<script>
+// ── Número de WhatsApp: prefijo + número, sin signos ni espacios.
+const TEL = "34673658778";
+
+// ── Las respuestas. El objetivo admite varias; el tiempo, uno solo.
+const respuesta = { objetivo: [], tiempo: "" };
+
+function enumerar(lista) {
+  if (lista.length === 1) return lista[0];
+  return lista.slice(0, -1).join(", ") + " y " + lista[lista.length - 1];
+}
+
+function mensaje() {
+  const hayObjetivo = respuesta.objetivo.length > 0;
+  if (!hayObjetivo && !respuesta.tiempo) {
+    return "Hola Samu, vengo de tu Instagram. Quiero información sobre entrenar contigo.";
+  }
+  let t = "Hola Samu, vengo de tu Instagram.\n";
+  if (hayObjetivo)      t += "\nMi objetivo: " + enumerar(respuesta.objetivo);
+  if (respuesta.tiempo) t += "\nPuedo entrenar: " + respuesta.tiempo + " a la semana";
+  return t + "\n\n¿Cómo lo ves?";
+}
+
+function actualizarEnlaces() {
+  const url = "https://wa.me/" + TEL + "?text=" + encodeURIComponent(mensaje());
+  const enlaces = document.querySelectorAll("[data-wa]");
+  for (const a of enlaces) a.href = url;
+}
+
+// Elegir ficha. Volver a tocar la misma la deselecciona.
+document.addEventListener("click", function (e) {
+  const chip = e.target.closest(".chip");
+  if (!chip) return;
+
+  const caja = chip.closest(".chips");
+  const grupo = caja.dataset.grupo;
+  const admiteVarias = caja.dataset.multiple === "true";
+  const yaEstaba = chip.getAttribute("aria-pressed") === "true";
+
+  if (admiteVarias) {
+    chip.setAttribute("aria-pressed", yaEstaba ? "false" : "true");
+    respuesta[grupo] = Array.from(caja.querySelectorAll('.chip[aria-pressed="true"]'))
+                            .map(function (c) { return c.dataset.v; });
+  } else {
+    for (const c of caja.querySelectorAll(".chip")) c.setAttribute("aria-pressed", "false");
+    if (yaEstaba) {
+      respuesta[grupo] = "";
+    } else {
+      chip.setAttribute("aria-pressed", "true");
+      respuesta[grupo] = chip.dataset.v;
+    }
+  }
+
+  // Ya saben que se toca: fuera el aviso.
+  for (const c of document.querySelectorAll(".chips.avisa")) c.classList.remove("avisa");
+
+  actualizarEnlaces();
+});
+
+actualizarEnlaces();
+
+// ── La barra fija sale solo cuando ningún botón grande está a la vista.
+//    Se mide a mano en cada scroll: IntersectionObserver no dispara en todos
+//    los visores y aquí no podemos permitirnos perder el botón.
+const bar = document.getElementById("sticky");
+const botones = [document.getElementById("cta-top"), document.getElementById("cta-end")];
+
+function repintar() {
+  const alto = window.innerHeight;
+  const algunoALaVista = botones.some(function (el) {
+    const r = el.getBoundingClientRect();
+    return r.bottom > 0 && r.top < alto;
+  });
+  bar.classList.toggle("on", !algunoALaVista);
+}
+
+addEventListener("scroll", repintar, { passive: true });
+addEventListener("resize", repintar);
+addEventListener("load", repintar);
+repintar();
+</script>
+
+</body>
+</html>
