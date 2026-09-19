@@ -615,6 +615,55 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 // ── Número de WhatsApp: prefijo + número, sin signos ni espacios.
 const TEL = "34673658778";
 
+// ── Contador (GoatCounter: sin cookies y sin datos personales).
+//    Cada registro lleva delante de dónde vino la visita, para ver en el panel
+//    cuánta gente llega y cuánta escribe: "anuncio / visita", "anuncio / whatsapp-arriba"…
+//    Para que no te cuente a ti, abre una vez la web con #toggle-goatcounter al final.
+function origen() {
+  const q = new URLSearchParams(location.search);
+  const marca = (q.get("a") || "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 30);
+  if (marca) return marca;                                   // enlaces con ?a=historia, ?a=anuncio-octubre…
+  if (q.get("utm_content") === "link_in_bio") return "bio";  // Instagram marca así el enlace del perfil
+  if (q.has("fbclid")) return "anuncio";                     // resto de clics desde Meta: casi siempre el anuncio
+  if (/instagram\.com/.test(document.referrer)) return "instagram";
+  return "directo";
+}
+const ORIGEN = origen();
+const pendientes = [];
+
+function contar(que, esEvento) {
+  const enviar = function () {
+    window.goatcounter.count({ path: ORIGEN + " / " + que, title: que, event: esEvento !== false });
+  };
+  if (window.goatcounter && window.goatcounter.count) enviar();
+  else pendientes.push(enviar);
+}
+
+window.goatcounter = { no_onload: true };
+(function () {
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = "https://gc.zgo.at/count.js";
+  s.dataset.goatcounter = "https://bautruths.goatcounter.com/count";
+  s.onload = function () { pendientes.splice(0).forEach(function (f) { f(); }); };
+  document.head.appendChild(s);
+})();
+
+contar("visita", false);
+
+// Toques en los botones de WhatsApp y en las otras vías.
+document.addEventListener("click", function (e) {
+  const a = e.target.closest("a");
+  if (!a) return;
+  if (a.hasAttribute("data-wa")) {
+    contar("whatsapp-" + (a.id === "cta-top" ? "arriba" : a.id === "cta-end" ? "final" : "barra"));
+  } else if (a.href.indexOf("ig.me") > -1) {
+    contar("instagram-dm");
+  } else if (a.href.indexOf("jotform") > -1) {
+    contar("formulario");
+  }
+});
+
 // ── Las respuestas. El objetivo admite varias; el tiempo, uno solo.
 const respuesta = { objetivo: [], tiempo: "" };
 
@@ -641,6 +690,7 @@ function actualizarEnlaces() {
 }
 
 // Elegir ficha. Volver a tocar la misma la deselecciona.
+let tocoFicha = false;
 document.addEventListener("click", function (e) {
   const chip = e.target.closest(".chip");
   if (!chip) return;
@@ -667,6 +717,8 @@ document.addEventListener("click", function (e) {
   // Ya saben que se toca: fuera el aviso.
   for (const c of document.querySelectorAll(".chips.avisa")) c.classList.remove("avisa");
 
+  if (!tocoFicha) { tocoFicha = true; contar("fichas"); }
+
   actualizarEnlaces();
 });
 
@@ -677,6 +729,8 @@ actualizarEnlaces();
 //    los visores y aquí no podemos permitirnos perder el botón.
 const bar = document.getElementById("sticky");
 const botones = [document.getElementById("cta-top"), document.getElementById("cta-end")];
+const cierre = document.querySelector(".closing");
+let vioFinal = false;
 
 function repintar() {
   const alto = window.innerHeight;
@@ -685,6 +739,12 @@ function repintar() {
     return r.bottom > 0 && r.top < alto;
   });
   bar.classList.toggle("on", !algunoALaVista);
+
+  // Una vez por visita: ¿llegó a ver el cierre de la página?
+  if (!vioFinal && cierre.getBoundingClientRect().top < alto) {
+    vioFinal = true;
+    contar("llego-al-final");
+  }
 }
 
 addEventListener("scroll", repintar, { passive: true });
