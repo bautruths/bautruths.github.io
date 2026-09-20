@@ -130,19 +130,35 @@ body{
 .thesis{border-top:1px solid var(--rule-strong);padding:1.2rem 0 1.8rem}
 .thesis h1{
   font-family:"Archivo Black",Impact,sans-serif;
-  font-size:clamp(2rem,9.5vw,2.85rem);
+  /* 8.6vw: "Consigue el doble." cabe en una línea y el botón sube sin tener que bajar */
+  font-size:clamp(1.8rem,8.6vw,2.85rem);
   line-height:.99;letter-spacing:-.015em;margin:0;text-wrap:balance;
 }
 .thesis h1 .b{display:block;color:var(--copper)}
-.thesis p{margin:.8rem 0 0;color:var(--muted);font-size:1.02rem;max-width:33ch}
+/* Solo la frase de entrada. Antes era ".thesis p" y pisaba las etiquetas de las
+   preguntas, la frase del gancho y la nota del botón: salían grises y grandes. */
+.thesis p.lead{margin:.8rem 0 0;color:var(--muted);font-size:1.02rem}
+
+/* Una frase real de un cliente, justo debajo del botón */
+.thesis p.cita{
+  margin:1.4rem 0 0;padding-left:.9rem;
+  border-left:2px solid var(--copper);
+  font-style:italic;font-size:1.02rem;line-height:1.45;color:var(--text);
+}
+.cita span{
+  display:block;margin-top:.3rem;font-style:normal;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:.7rem;letter-spacing:.05em;color:var(--muted);
+}
 
 /* ── Las dos preguntas, en fichas ── */
 .quiz{margin-top:1.05rem;display:flex;flex-direction:column;gap:.65rem}
+/* El gancho: lo que se lleva por tocar dos fichas */
 .quiz-hint{
   margin:0;
   font-family:"Archivo",system-ui,sans-serif;
-  font-weight:600;font-size:.72rem;letter-spacing:.04em;
-  color:var(--copper);
+  font-weight:600;font-size:.88rem;line-height:1.35;
+  color:var(--text);
 }
 .qgroup{display:flex;flex-direction:column;gap:.45rem}
 .qlabel{margin:0;color:var(--copper)}
@@ -290,6 +306,7 @@ body{
   width:20px;height:2px;margin-top:.8rem;
   background:var(--copper);
 }
+.puente{margin:1.3rem 0 0;font-size:1.06rem;color:var(--text)}
 
 /* ── Mensajes de clientes ── */
 .pruebas-nota{
@@ -389,6 +406,7 @@ body{
   font-size:clamp(1.45rem,6.2vw,1.9rem);
   line-height:1.06;margin:0 0 1.3rem;text-wrap:balance;
 }
+.closing-lead{margin:-.35rem 0 1.3rem;color:var(--muted);font-size:1rem}
 
 footer{
   margin-top:2.9rem;border-top:1px solid var(--rule);
@@ -425,6 +443,58 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
   .cta:hover{transform:none}
   .chips.avisa .chip{animation:none}
 }
+
+/* ══ Reestructuración del 2026-09-20. Bloques nuevos, al final de la hoja
+      para que nada de arriba los pise. ══ */
+
+/* Las cuatro ventajas de la primera pantalla */
+.ventajas{list-style:none;margin:1.05rem 0 0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.ventajas li{
+  display:flex;align-items:center;gap:.6rem;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:.95rem;color:var(--text);
+}
+.ventajas li b{font-weight:600}
+
+
+/* Entradilla de sección */
+.bloque-lead{margin:0 0 1.2rem;color:var(--muted);font-size:1rem}
+
+/* "Esto NO va contigo si": misma lista, marca distinta */
+.espejo.no li::before{
+  content:"";
+  background:none;
+  border-left:2px solid var(--muted);
+  border-bottom:2px solid var(--muted);
+  transform:rotate(-45deg);
+  width:9px;height:5px;
+  margin-top:.5rem;
+  opacity:.75;
+}
+.espejo.no li{color:var(--muted)}
+
+/* Ficha de testimonio con nombre y contexto */
+.quien{
+  margin:.45rem 0 0;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:.78rem;letter-spacing:.04em;
+  color:var(--copper);
+}
+
+/* Donde el emoji ya hace de marca, fuera el rombo: no hacen falta los dos */
+.incluye.conemoji li::before{display:none}
+.incluye.conemoji li{padding-left:.1rem}
+
+/* Iconos de línea en cobre, mismo trazo que los de la app */
+.ico{
+  flex:0 0 auto;
+  width:20px;height:20px;
+  stroke:var(--copper);fill:none;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+}
+.incluye.conicono li::before{display:none}
+.incluye.conicono li{gap:.75rem;align-items:flex-start}
+.incluye.conicono .ico{margin-top:.15rem}
 </style>
 
 </head>
@@ -439,135 +509,61 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
     <span class="online">Entrenador online</span>
   </header>
 
+  <!-- ── 1. El problema, y qué haces con él ── -->
   <section class="thesis">
-    <h1>Entrena la mitad.<span class="b">Consigue el doble.</span></h1>
-    <p>Músculo con evidencia, para gente sin tiempo. Entreno online, uno a uno, entrenes donde entrenes.</p>
-    <p class="sin">Sin vivir en el gimnasio · Sin rutinas copiadas · Sin entrenar a ciegas</p>
+    <h1>¿Te cuesta saber qué hacer cuando vas al gimnasio?</h1>
+    <p class="lead">Te preparo un entrenamiento adaptado a ti y te acompaño para que sepas qué hacer, cómo progresar y cuándo cambiarlo.</p>
 
-    <div class="quiz">
-      <p class="quiz-hint">↓ Toca para elegir</p>
-      <div class="qgroup">
-        <p class="qlabel tag" id="lbl-objetivo">Qué buscas <span class="mini">marca las que quieras</span></p>
-        <div class="chips avisa" role="group" aria-labelledby="lbl-objetivo" data-grupo="objetivo" data-multiple="true">
-          <button type="button" class="chip" aria-pressed="false" data-v="ganar masa muscular">Ganar músculo</button>
-          <button type="button" class="chip" aria-pressed="false" data-v="perder grasa">Perder grasa</button>
-          <button type="button" class="chip" aria-pressed="false" data-v="mejorar mi rendimiento">Rendimiento</button>
-          <button type="button" class="chip" aria-pressed="false" data-v="aún no lo tengo claro">Aún no lo sé</button>
-        </div>
-      </div>
-      <div class="qgroup">
-        <p class="qlabel tag" id="lbl-tiempo">Tiempo a la semana</p>
-        <div class="chips avisa" role="group" aria-labelledby="lbl-tiempo" data-grupo="tiempo">
-          <button type="button" class="chip" aria-pressed="false" data-v="menos de 2 h">Menos de 2 h</button>
-          <button type="button" class="chip" aria-pressed="false" data-v="entre 2 y 4 h">2 – 4 h</button>
-          <button type="button" class="chip" aria-pressed="false" data-v="más de 4 h">Más de 4 h</button>
-        </div>
-      </div>
-    </div>
+    <ul class="ventajas">
+      <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9v6M17.5 9v6M4 10.5v3M20 10.5v3M6.5 12h11"/></svg><b>Entrenamiento personalizado</b></li>
+      <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 16v-4M12.5 16V8M17 16v-6"/></svg><b>Progresión y seguimiento</b></li>
+      <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10.4 8.8l5.2 3.2-5.2 3.2z"/></svg><b>Vídeos de los ejercicios</b></li>
+      <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.8a7.7 7.7 0 0 1-7.7 7.7H5.2l1.7-3.1a7.7 7.7 0 1 1 13.6-4.6z"/></svg><b>Contacto directo conmigo</b></li>
+    </ul>
 
-    <a class="cta" id="cta-top" data-wa href="#">ESCRÍBEME POR WHATSAPP</a>
-    <p class="cta-note">Se abre tu WhatsApp con el mensaje ya escrito. Solo dale a enviar.</p>
+    <a class="cta" id="cta-top" data-wa data-sitio="arriba" href="#">QUIERO CONTARTE MI CASO</a>
+    <p class="cta-note">Te abrirá WhatsApp con un mensaje preparado. Sin formularios ni llamadas.</p>
   </section>
 
-  <section class="specs">
-    <div class="spec"><b>+100</b><span class="tag">Casos<br>de éxito</span></div>
-    <div class="spec"><b>180</b><span class="tag">Ejercicios<br>en tu plan</span></div>
-    <div class="spec"><b>134</b><span class="tag">Con vídeo<br>propio</span></div>
-  </section>
-
-  <h2 class="shead"><span class="tag">Qué pasa cuando me escribes</span></h2>
-  <ol class="steps">
-    <li class="step">
-      <span class="step-n">01</span>
-      <div>
-        <h3>Le das a enviar</h3>
-        <p>El mensaje va escrito con lo que has marcado arriba. No tienes que redactar nada.</p>
-      </div>
-    </li>
-    <li class="step">
-      <span class="step-n">02</span>
-      <div>
-        <h3>Te contesto yo</h3>
-        <p>No un bot ni un comercial. Miro tu caso y te digo qué haría en tu situación, entrenes conmigo o no.</p>
-      </div>
-    </li>
-    <li class="step">
-      <span class="step-n">03</span>
-      <div>
-        <h3>Decides tú</h3>
-        <p>Si encajamos, montamos tu plan y empiezas. Si no, te quedas con la respuesta igual. Sin insistir.</p>
-      </div>
-    </li>
-  </ol>
-
-  <h2 class="shead"><span class="tag">Quién te va a contestar</span></h2>
-  <div class="bio">
-    <img class="bio-foto" src="samuel.jpg" width="1179" height="1572" loading="lazy"
-         alt="Samuel Rodríguez Baudru en el gimnasio, con la camiseta de BAUTRUTHS">
-    <div class="bio-texto">
-      <p>Me llamo <strong>Samuel Rodríguez Baudru</strong>. Soy graduado en Ciencias de la Actividad Física y el Deporte, y entreno online a gente que no vive en el gimnasio.</p>
-      <p>Del deporte siempre me ha enganchado una cosa por encima de todas: ver cómo alguien mejora poco a poco. No el día que levanta mucho, sino las semanas que hay detrás.</p>
-      <p>Empecé readaptando lesiones y preparando atletas — tenis, fútbol, pádel, deportes de contacto. De ahí pasé al entrenamiento personal y me quedé, porque cambiarle a alguien la salud y la actitud engancha más que cualquier marca.</p>
-      <p>Lo que no soporto del sector es la cantidad de rutinas que se hacen «porque funcionan», sin que nadie sepa explicar por qué. Todo tiene una explicación y yo soy de los que necesitan encontrarla. De ahí viene lo de músculo con evidencia: no es un eslogan, es que no sé trabajar de otra manera.</p>
-      <p class="bio-firma">Cuando escribas, te contesto yo. No hay nadie más.</p>
-    </div>
-  </div>
-
-  <h2 class="shead"><span class="tag">Qué incluye entrenar conmigo</span></h2>
-  <ul class="incluye">
-    <li><span><strong>Tu plan, hecho a mano</strong>Lo monto yo mirando tu objetivo, tu nivel y los días que puedes de verdad. No sale de ninguna plantilla.</span></li>
-    <li><span><strong>Progresión e intensidad marcadas</strong>Cargas y repeticiones planificadas semana a semana, y el RIR de cada serie: sabes cuánto apretar sin quedarte corto ni pasarte.</span></li>
-    <li><span><strong>Cada ejercicio con mi vídeo</strong>No uno genérico de internet: el mío, explicando cómo se hace y los fallos que comete casi todo el mundo.</span></li>
-    <li><span><strong>Tu app en el móvil</strong>El plan de la semana, los vídeos y el registro, en un solo sitio. Lo abres en el gimnasio y sabes exactamente qué toca.</span></li>
-    <li><span><strong>Yo reviso lo que registras</strong>Apuntas tus series y miro si la progresión avanza. Si se atasca, cambio el plan. Ese es el trabajo.</span></li>
-    <li><span><strong>WhatsApp directo conmigo</strong>Me escribes a mí. No a un ayudante, no a un bot, no a un formulario.</span></li>
+  <!-- ── 2. Que se reconozca ── -->
+  <h2 class="shead"><span class="tag">Si esto te suena</span></h2>
+  <ul class="espejo">
+    <li>Tienes poco tiempo para entrenar y quieres aprovecharlo.</li>
+    <li>Vas al gimnasio, pero muchas veces no sabes si lo estás haciendo bien.</li>
+    <li>No sabes cuánto peso usar ni cuándo subirlo.</li>
+    <li>Empiezas motivado y acabas perdiendo la constancia.</li>
+    <li>No quieres vivir en el gimnasio. Quieres entrenar bien y punto.</li>
   </ul>
+  <p class="bloque-lead" style="margin-top:1.2rem">Entonces probablemente pueda ayudarte.</p>
+  <a class="cta" id="cta-suena" data-wa data-sitio="suena" href="#">HABLAR CON SAMUEL</a>
 
+  <!-- ── 3. Qué haces exactamente ── -->
+  <h2 class="shead"><span class="tag">No necesitas otra rutina</span></h2>
+  <p class="bloque-lead">Necesitas saber qué hacer. Mi trabajo es que entrenes de forma sencilla, progreses y consigas resultados sin vivir pendiente del gimnasio.</p>
+  <ul class="incluye">
+    <li><span><strong>Tu plan se adapta a ti</strong>Tu objetivo, tu nivel, el tiempo que tienes y el material del que dispones.</span></li>
+    <li><span><strong>Sabes qué hacer cada día</strong>Tienes el entrenamiento preparado en la app. No llegas a improvisar.</span></li>
+    <li><span><strong>Sabes cómo progresar</strong>Consultas lo que hiciste la vez anterior y sabes qué tienes que intentar mejorar.</span></li>
+    <li><span><strong>Yo reviso tu evolución</strong>Veo cómo estás entrenando y ajusto la planificación cuando hace falta.</span></li>
+    <li><span><strong>Y si tienes una duda</strong>Me tienes directamente por WhatsApp. A mí, no a un ayudante.</span></li>
+  </ul>
+  <a class="cta" id="cta-mid" data-wa data-sitio="servicio" href="#">QUIERO SABER CÓMO FUNCIONA</a>
+
+  <!-- ── 4. La app, como prueba de que esto existe ── -->
+  <h2 class="shead"><span class="tag">Así es como entrenas conmigo</span></h2>
   <figure class="app-vista">
     <img src="app.jpg" width="620" height="1216" loading="lazy"
          alt="La app de BAUTRUTHS: el entrenamiento del día con series, repeticiones, descansos y los pesos registrados">
-    <figcaption>Así ves tu semana. Cada ejercicio con su vídeo y tus series apuntadas.</figcaption>
   </figure>
-
-  <h2 class="shead"><span class="tag">Esto va contigo si</span></h2>
-  <ul class="espejo">
-    <li>Tienes trabajo y tienes vida, y el gimnasio es lo primero que cae cuando la semana se complica.</li>
-    <li>No quieres vivir en el gimnasio. Quieres entrenar bien y punto.</li>
-    <li>Tu rutina la sacaste de alguien del gym, de un vídeo o de una IA.</li>
-    <li>No sabes si estás progresando o simplemente estás estancado.</li>
-    <li>No tienes ni idea de hacer los ejercicios ni de por dónde empezar.</li>
+  <ul class="incluye conicono" style="margin-top:1.3rem">
+    <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9v6M17.5 9v6M4 10.5v3M20 10.5v3M6.5 12h11"/></svg><span><strong>Tu entrenamiento preparado</strong>No tienes que llegar al gimnasio a improvisar.</span></li>
+    <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 16v-4M12.5 16V8M17 16v-6"/></svg><span><strong>Tu progreso</strong>Ves lo que hiciste y sabes qué intentar superar.</span></li>
+    <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10.4 8.8l5.2 3.2-5.2 3.2z"/></svg><span><strong>Vídeos de cada ejercicio</strong>Si dudas de cómo se hace, tienes mi explicación.</span></li>
+    <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.6 12S6.2 5.8 12 5.8 21.4 12 21.4 12 17.8 18.2 12 18.2 2.6 12 2.6 12z"/><circle cx="12" cy="12" r="2.7"/></svg><span><strong>Yo veo lo que haces</strong>Tu entrenamiento no desaparece después de darte una rutina.</span></li>
   </ul>
 
-  <section class="filter">
-    <h3>No trabajo con todo el mundo</h3>
-    <p>Si buscas perder diez kilos en un mes o un PDF genérico, no soy tu entrenador. Si quieres construir músculo con cabeza, entrenando menos horas de las que crees, encajamos.</p>
-  </section>
-
-  <h2 class="shead"><span class="tag">Lo que me preguntáis siempre</span></h2>
-  <div class="faq">
-    <details>
-      <summary>No tengo tiempo</summary>
-      <p>Es justo la gente con la que trabajo. El plan se hace sobre los días que tienes de verdad, no sobre los que te gustaría tener. Con dos o tres sesiones bien planteadas se avanza; con cinco mal aprovechadas, no. De ahí viene lo de entrenar la mitad.</p>
-    </details>
-    <details>
-      <summary>¿Dónde entreno? ¿Tengo que ir a tu gimnasio?</summary>
-      <p>No. Entrenas en el gimnasio que ya tengas, o en el que te pille cerca. Yo trabajo 100% online: te monto el plan según las máquinas que tengas disponibles, lo llevas en la app con los vídeos, y hablamos por WhatsApp. Vivas donde vivas.</p>
-    </details>
-    <details>
-      <summary>No sé hacer bien los ejercicios</summary>
-      <p>Cada ejercicio de tu plan lleva mi vídeo explicándolo, con los fallos típicos avisados antes de que los cometas. Y si dudas de algo, me grabas la serie y te digo qué corregir. Nadie empieza sabiendo.</p>
-    </details>
-    <details>
-      <summary>Me da miedo que no estés pendiente de mí</summary>
-      <p>Por eso registras tus series: no es burocracia, es lo que yo miro cada semana. Si algo lleva dos semanas sin moverse, lo veo antes que tú. Y me escribes directamente a mí por WhatsApp, no a un equipo de soporte.</p>
-    </details>
-    <details>
-      <summary>¿Voy a pasarlo mal?</summary>
-      <p>No. Ni sufrir en cada ejercicio, ni dos horas de gimnasio, ni salir arrastrándote de cada sesión. El RIR existe justo para eso: para que sepas cuánto apretar sin destrozarte. Si odias el proceso lo dejas en tres semanas, y entonces no sirve de nada.</p>
-    </details>
-  </div>
-
-  <h2 class="shead"><span class="tag">Lo que me dicen</span></h2>
+  <!-- ── 5. Prueba: lo que dicen ── -->
+  <h2 class="shead"><span class="tag">Personas que ya entrenan conmigo</span></h2>
   <p class="pruebas-nota">Mensajes de clientes, tal cual me llegan. Sin nombres, por respeto a ellos.</p>
   <div class="pruebas">
     <img src="op1.jpg" width="720" height="390" loading="lazy" alt="Cliente: «muchísimas gracias tío, de verdad que sin ti dudo que lo hubiera conseguido»">
@@ -579,10 +575,80 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
   </div>
   <p class="desliza">→ Desliza para ver más</p>
 
+  <!-- ── 6. El filtro ── -->
+  <h2 class="shead"><span class="tag">Esto no va contigo si</span></h2>
+  <ul class="espejo no">
+    <li>Buscas una rutina genérica para hacer por tu cuenta.</li>
+    <li>Quieres resultados sin entrenar ni ser constante.</li>
+    <li>Quieres que te diga qué hacer, pero no estás dispuesto a hacerlo.</li>
+  </ul>
+
+  <!-- ── 7. Quién soy ── -->
+  <h2 class="shead"><span class="tag">Quién te va a contestar</span></h2>
+  <div class="bio">
+    <img class="bio-foto" src="samuel.jpg" width="1179" height="1572" loading="lazy"
+         alt="Samuel Rodríguez Baudru en el gimnasio, con la camiseta de BAUTRUTHS">
+    <div class="bio-texto">
+      <p>Soy <strong>Samuel</strong>, y mi trabajo es que el gimnasio deje de ser un lío.</p>
+      <p>Soy entrenador personal, graduado en Ciencias de la Actividad Física y el Deporte, y llevo años estudiando cómo hacer que entrenar sea más sencillo y más efectivo. Empecé readaptando lesiones y preparando atletas, y de ahí pasé al entrenamiento personal.</p>
+      <p>No quiero que dependas de rutinas aleatorias ni que tengas que convertirte en experto en fitness para progresar. Quiero que sepas qué hacer, por qué lo haces y cómo mejorar.</p>
+    </div>
+  </div>
+  <a class="cta" id="cta-bio" data-wa data-sitio="bio" href="#">HABLAR CONMIGO</a>
+
+  <!-- ── 8. Dudas ── -->
+  <h2 class="shead"><span class="tag">Preguntas frecuentes</span></h2>
+  <div class="faq">
+    <details>
+      <summary>¿Necesito experiencia entrenando?</summary>
+      <p>No. El plan se adapta a tu nivel, empieces por donde empieces.</p>
+    </details>
+    <details>
+      <summary>¿Cuántos días tengo que entrenar?</summary>
+      <p>Depende de tu situación y de tu objetivo. La planificación se adapta a los días que tengas de verdad, no a los que te gustaría tener.</p>
+    </details>
+    <details>
+      <summary>¿Necesito gimnasio?</summary>
+      <p>Lo ideal es que tengas acceso al material que pide tu objetivo, pero eso lo vemos según tu caso. Entreno online: tú entrenas donde te venga bien.</p>
+    </details>
+    <details>
+      <summary>¿Cómo es el seguimiento?</summary>
+      <p>Registras tus entrenamientos, yo reviso tu evolución y ajusto la planificación cuando hace falta. Y me escribes directamente por WhatsApp.</p>
+    </details>
+    <details>
+      <summary>¿Cómo empiezo?</summary>
+      <p>Me escribes por WhatsApp, me cuentas tu situación y vemos si puedo ayudarte. Sin pagar nada y sin compromiso.</p>
+    </details>
+  </div>
+
+  <!-- ── 9. Cierre ── -->
   <section class="closing">
-    <h2 class="closing-title">Un mensaje ahora te ahorra meses entrenando a ciegas.</h2>
-    <a class="cta" id="cta-end" style="margin-top:0" data-wa href="#">ESCRÍBEME POR WHATSAPP</a>
-    <p class="cta-note">Sin pagar nada · sin compromiso</p>
+    <h2 class="closing-title">¿Quieres dejar de entrenar a ciegas?</h2>
+    <p class="closing-lead">Cuéntame qué quieres conseguir y vemos si puedo ayudarte.</p>
+
+    <div class="quiz">
+      <p class="quiz-hint">↓ Si marcas esto, llego con tu caso medio entendido</p>
+      <div class="qgroup">
+        <p class="qlabel tag" id="lbl-objetivo">Qué buscas <span class="mini">marca las que quieras</span></p>
+        <div class="chips" role="group" aria-labelledby="lbl-objetivo" data-grupo="objetivo" data-multiple="true">
+          <button type="button" class="chip" aria-pressed="false" data-v="ganar masa muscular">Ganar músculo</button>
+          <button type="button" class="chip" aria-pressed="false" data-v="perder grasa">Perder grasa</button>
+          <button type="button" class="chip" aria-pressed="false" data-v="mejorar mi rendimiento">Rendimiento</button>
+          <button type="button" class="chip" aria-pressed="false" data-v="ponerme en forma">Ponerme en forma</button>
+        </div>
+      </div>
+      <div class="qgroup">
+        <p class="qlabel tag" id="lbl-tiempo">Tiempo a la semana</p>
+        <div class="chips" role="group" aria-labelledby="lbl-tiempo" data-grupo="tiempo">
+          <button type="button" class="chip" aria-pressed="false" data-v="menos de 2 h">Menos de 2 h</button>
+          <button type="button" class="chip" aria-pressed="false" data-v="entre 2 y 4 h">2 – 4 h</button>
+          <button type="button" class="chip" aria-pressed="false" data-v="más de 4 h">Más de 4 h</button>
+        </div>
+      </div>
+    </div>
+
+    <a class="cta" id="cta-end" data-wa data-sitio="final" href="#">HABLAR CON SAMUEL POR WHATSAPP</a>
+    <p class="cta-note">Te responderé personalmente.</p>
 
     <h2 class="shead"><span class="tag">Si prefieres otra vía</span></h2>
     <div class="doors">
@@ -605,11 +671,11 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 
 </main>
 
+
 <div class="sticky" id="sticky">
   <div class="wrap">
-    <a class="cta" data-wa href="#">ESCRÍBEME POR WHATSAPP</a>
+    <a class="cta" data-wa href="#">QUIERO QUE VEAS MI CASO</a>
   </div>
-</div>
 
 <script>
 // ── Número de WhatsApp: prefijo + número, sin signos ni espacios.
@@ -652,11 +718,12 @@ window.goatcounter = { no_onload: true };
 contar("visita", false);
 
 // Toques en los botones de WhatsApp y en las otras vías.
+// Cada botón lleva su data-sitio, así que en el panel se ve cuál convierte.
 document.addEventListener("click", function (e) {
   const a = e.target.closest("a");
   if (!a) return;
   if (a.hasAttribute("data-wa")) {
-    contar("whatsapp-" + (a.id === "cta-top" ? "arriba" : a.id === "cta-end" ? "final" : "barra"));
+    contar("whatsapp-" + (a.dataset.sitio || "barra"));
   } else if (a.href.indexOf("ig.me") > -1) {
     contar("instagram-dm");
   } else if (a.href.indexOf("jotform") > -1) {
@@ -672,15 +739,19 @@ function enumerar(lista) {
   return lista.slice(0, -1).join(", ") + " y " + lista[lista.length - 1];
 }
 
+// El saludo se ajusta a de dónde viene, para que Samuel sepa leerlo de un vistazo.
+// Devuelve la frase entera: si no, "Hola Samuel" + " y quiero..." queda mal escrito.
+function saludo() {
+  if (ORIGEN === "anuncio") return "Hola Samuel, he visto tu anuncio y quiero contarte mi caso";
+  if (ORIGEN === "bio" || ORIGEN === "instagram") return "Hola Samuel, vengo de tu Instagram y quiero contarte mi caso";
+  return "Hola Samuel, quiero contarte mi caso";
+}
+
 function mensaje() {
-  const hayObjetivo = respuesta.objetivo.length > 0;
-  if (!hayObjetivo && !respuesta.tiempo) {
-    return "Hola Samu, vengo de tu Instagram. Quiero información sobre entrenar contigo.";
-  }
-  let t = "Hola Samu, vengo de tu Instagram.\n";
-  if (hayObjetivo)      t += "\nMi objetivo: " + enumerar(respuesta.objetivo);
-  if (respuesta.tiempo) t += "\nPuedo entrenar: " + respuesta.tiempo + " a la semana";
-  return t + "\n\n¿Cómo lo ves?";
+  let t = saludo() + ", para saber cómo podrías ayudarme con mi entrenamiento.";
+  if (respuesta.objetivo.length) t += "\n\nMi objetivo: " + enumerar(respuesta.objetivo);
+  if (respuesta.tiempo)          t += "\nPuedo entrenar: " + respuesta.tiempo + " a la semana";
+  return t;
 }
 
 function actualizarEnlaces() {
@@ -724,11 +795,14 @@ document.addEventListener("click", function (e) {
 
 actualizarEnlaces();
 
-// ── La barra fija sale solo cuando ningún botón grande está a la vista.
+// ── La barra fija sale solo cuando ningún botón grande se ve ENTERO.
+//    Si un botón solo asoma por abajo, no cuenta: en móviles pequeños el de
+//    arriba quedaba medio cortado y la barra no salía.
 //    Se mide a mano en cada scroll: IntersectionObserver no dispara en todos
 //    los visores y aquí no podemos permitirnos perder el botón.
 const bar = document.getElementById("sticky");
-const botones = [document.getElementById("cta-top"), document.getElementById("cta-end")];
+const botones = Array.prototype.slice.call(document.querySelectorAll("[data-wa]"))
+                     .filter(function (el) { return !bar.contains(el); });
 const cierre = document.querySelector(".closing");
 let vioFinal = false;
 
@@ -736,7 +810,7 @@ function repintar() {
   const alto = window.innerHeight;
   const algunoALaVista = botones.some(function (el) {
     const r = el.getBoundingClientRect();
-    return r.bottom > 0 && r.top < alto;
+    return r.top >= 0 && r.bottom <= alto;
   });
   bar.classList.toggle("on", !algunoALaVista);
 
