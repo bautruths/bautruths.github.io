@@ -151,52 +151,6 @@ body{
   font-size:.7rem;letter-spacing:.05em;color:var(--muted);
 }
 
-/* ── Las dos preguntas, en fichas ── */
-.quiz{margin-top:1.05rem;display:flex;flex-direction:column;gap:.65rem}
-/* El gancho: lo que se lleva por tocar dos fichas */
-.quiz-hint{
-  margin:0;
-  font-family:"Archivo",system-ui,sans-serif;
-  font-weight:600;font-size:.88rem;line-height:1.35;
-  color:var(--text);
-}
-.qgroup{display:flex;flex-direction:column;gap:.45rem}
-.qlabel{margin:0;color:var(--copper)}
-.qlabel .mini{
-  font-weight:500;font-size:.62rem;letter-spacing:.03em;
-  text-transform:none;color:var(--muted);
-  margin-left:.4rem;white-space:nowrap;
-}
-.chips{display:flex;flex-wrap:wrap;gap:.4rem}
-.chip{
-  font-family:"Archivo",system-ui,sans-serif;
-  font-weight:500;font-size:.85rem;
-  color:var(--text);
-  background:var(--surface);
-  border:1px solid var(--rule-strong);
-  border-radius:999px;
-  padding:.44rem .85rem;
-  cursor:pointer;
-  transition:background .15s ease,border-color .15s ease,color .15s ease;
-}
-.chip:hover{border-color:var(--copper)}
-.chip[aria-pressed="true"]{
-  background:var(--copper);
-  border-color:var(--copper);
-  color:var(--on-copper);
-  font-weight:600;
-}
-.chip[aria-pressed="true"]::before{content:"✓ "}
-
-/* Aviso de "esto se toca", solo hasta el primer toque */
-@keyframes latido{
-  0%,100%{box-shadow:0 0 0 0 rgba(184,115,51,0)}
-  50%{box-shadow:0 0 0 4px rgba(184,115,51,.25)}
-}
-.chips.avisa .chip{animation:latido 1.9s ease-in-out 3}
-.chips.avisa .chip:nth-child(2){animation-delay:.12s}
-.chips.avisa .chip:nth-child(3){animation-delay:.24s}
-.chips.avisa .chip:nth-child(4){animation-delay:.36s}
 
 /* ── Botón ── */
 .cta{
@@ -439,9 +393,8 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 }
 
 @media (prefers-reduced-motion: reduce){
-  .cta,.sticky,.chip{transition:none}
+  .cta,.sticky{transition:none}
   .cta:hover{transform:none}
-  .chips.avisa .chip{animation:none}
 }
 
 /* ══ Reestructuración del 2026-09-20. Bloques nuevos, al final de la hoja
@@ -618,26 +571,6 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
   <section class="closing">
     <h2 class="closing-title">Cuéntame tu caso.</h2>
 
-    <div class="quiz">
-      <p class="quiz-hint">↓ Márcalo y llego sabiendo de qué vamos</p>
-      <div class="qgroup">
-        <p class="qlabel tag" id="lbl-objetivo">Qué buscas <span class="mini">las que quieras</span></p>
-        <div class="chips" role="group" aria-labelledby="lbl-objetivo" data-grupo="objetivo" data-multiple="true">
-          <button type="button" class="chip" aria-pressed="false" data-v="ganar masa muscular">Ganar músculo</button>
-          <button type="button" class="chip" aria-pressed="false" data-v="perder grasa">Perder grasa</button>
-          <button type="button" class="chip" aria-pressed="false" data-v="mejorar mi rendimiento">Rendimiento</button>
-          <button type="button" class="chip" aria-pressed="false" data-v="ponerme en forma">Ponerme en forma</button>
-        </div>
-      </div>
-      <div class="qgroup">
-        <p class="qlabel tag" id="lbl-tiempo">Tiempo a la semana</p>
-        <div class="chips" role="group" aria-labelledby="lbl-tiempo" data-grupo="tiempo">
-          <button type="button" class="chip" aria-pressed="false" data-v="menos de 2 h">Menos de 2 h</button>
-          <button type="button" class="chip" aria-pressed="false" data-v="entre 2 y 4 h">2 – 4 h</button>
-          <button type="button" class="chip" aria-pressed="false" data-v="más de 4 h">Más de 4 h</button>
-        </div>
-      </div>
-    </div>
 
     <a class="cta" id="cta-end" data-wa data-sitio="final" href="#">QUIERO CONTARTE MI CASO</a>
     <p class="cta-note">Te responderé personalmente. Si lo prefieres, por <a href="https://ig.me/m/bautruths">Instagram</a>.</p>
@@ -711,13 +644,6 @@ document.addEventListener("click", function (e) {
 });
 
 // ── Las respuestas. El objetivo admite varias; el tiempo, uno solo.
-const respuesta = { objetivo: [], tiempo: "" };
-
-function enumerar(lista) {
-  if (lista.length === 1) return lista[0];
-  return lista.slice(0, -1).join(", ") + " y " + lista[lista.length - 1];
-}
-
 // El saludo se ajusta a de dónde viene, para que Samuel sepa leerlo de un vistazo.
 // Devuelve la frase entera: si no, "Hola Samuel" + " y quiero..." queda mal escrito.
 function saludo() {
@@ -726,53 +652,16 @@ function saludo() {
   return "Hola Samuel, quiero contarte mi caso";
 }
 
+// El objetivo y la disponibilidad ya no se preguntan aquí: eso se habla
+// en el propio WhatsApp, para que en la web no haya nada que decidir.
 function mensaje() {
-  let t = saludo() + ", para saber cómo podrías ayudarme con mi entrenamiento.";
-  if (respuesta.objetivo.length) t += "\n\nMi objetivo: " + enumerar(respuesta.objetivo);
-  if (respuesta.tiempo)          t += "\nPuedo entrenar: " + respuesta.tiempo + " a la semana";
-  return t;
+  return saludo() + ", para saber cómo podrías ayudarme con mi entrenamiento.";
 }
 
-function actualizarEnlaces() {
+(function ponerEnlaces() {
   const url = "https://wa.me/" + TEL + "?text=" + encodeURIComponent(mensaje());
-  const enlaces = document.querySelectorAll("[data-wa]");
-  for (const a of enlaces) a.href = url;
-}
-
-// Elegir ficha. Volver a tocar la misma la deselecciona.
-let tocoFicha = false;
-document.addEventListener("click", function (e) {
-  const chip = e.target.closest(".chip");
-  if (!chip) return;
-
-  const caja = chip.closest(".chips");
-  const grupo = caja.dataset.grupo;
-  const admiteVarias = caja.dataset.multiple === "true";
-  const yaEstaba = chip.getAttribute("aria-pressed") === "true";
-
-  if (admiteVarias) {
-    chip.setAttribute("aria-pressed", yaEstaba ? "false" : "true");
-    respuesta[grupo] = Array.from(caja.querySelectorAll('.chip[aria-pressed="true"]'))
-                            .map(function (c) { return c.dataset.v; });
-  } else {
-    for (const c of caja.querySelectorAll(".chip")) c.setAttribute("aria-pressed", "false");
-    if (yaEstaba) {
-      respuesta[grupo] = "";
-    } else {
-      chip.setAttribute("aria-pressed", "true");
-      respuesta[grupo] = chip.dataset.v;
-    }
-  }
-
-  // Ya saben que se toca: fuera el aviso.
-  for (const c of document.querySelectorAll(".chips.avisa")) c.classList.remove("avisa");
-
-  if (!tocoFicha) { tocoFicha = true; contar("fichas"); }
-
-  actualizarEnlaces();
-});
-
-actualizarEnlaces();
+  for (const a of document.querySelectorAll("[data-wa]")) a.href = url;
+})();
 
 // ── La barra fija sale solo cuando ningún botón grande se ve ENTERO.
 //    Si un botón solo asoma por abajo, no cuenta: en móviles pequeños el de
