@@ -416,6 +416,36 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 /* "Vas al gimnasio, pero…" justo encima de la lista del problema */
 .antes-lista{margin:0 0 .55rem;color:var(--text);font-size:1.02rem}
 
+/* La captura de la app, en grande: es la demostración, no un adorno.
+   El <figure> trae 40 px de margen del navegador y recortaba la imagen. */
+.app-vista.grande{margin:0 0 1.1rem}
+.app-vista.grande img{width:min(100%,330px)}
+
+/* Lo que ves dentro de la app, en cuatro fichas */
+.app-datos{
+  list-style:none;margin:1.1rem 0 0;padding:0;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem;
+}
+.app-datos li{
+  display:flex;align-items:center;gap:.55rem;
+  background:var(--surface);border:1px solid var(--rule);
+  padding:.62rem .7rem;
+  font-family:"Archivo",system-ui,sans-serif;font-size:.88rem;color:var(--text);
+}
+.app-datos li::before{
+  content:"";flex:0 0 auto;
+  width:6px;height:6px;background:var(--copper);transform:rotate(45deg);
+}
+
+/* Seguimiento */
+.seguimiento-texto{margin:.5rem 0 0;color:var(--muted);font-size:1rem}
+.cadena{
+  margin:1.15rem 0 0;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:.92rem;line-height:1.75;
+  color:var(--copper);
+}
+
 /* Los cuatro pasos, en grande y con la flecha de uno al siguiente */
 .steps.grandes .step{gap:1.1rem;padding:1.25rem 0}
 .steps.grandes .step-n{
@@ -599,11 +629,26 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
   </ol>
   <p class="remate">Esto es BAUTRUTHS.</p>
 
-  <figure class="app-vista">
+  <!-- ── 5. La app ── -->
+  <h2 class="shead"><span class="tag">La app</span></h2>
+  <p class="bloque-lead">Esto es lo que ves cuando llegas al gimnasio.</p>
+  <figure class="app-vista grande">
     <img src="app.jpg" width="620" height="1216" loading="lazy"
          alt="La app de BAUTRUTHS: el entrenamiento del día con series, repeticiones, descansos y los pesos registrados">
-    <figcaption>Esto es lo que abres en el gimnasio.</figcaption>
   </figure>
+  <p class="antes-lista">No tienes que pensar qué toca. Abres la aplicación y tienes delante el entrenamiento que tienes que hacer.</p>
+  <ul class="app-datos">
+    <li>Series y repeticiones</li>
+    <li>Intensidad (RIR)</li>
+    <li>Descansos</li>
+    <li>Vídeos de ejecución</li>
+  </ul>
+
+  <!-- ── 6. Seguimiento ── -->
+  <h2 class="shead"><span class="tag">Seguimiento</span></h2>
+  <p class="antes-lista">Y no desaparezco después de darte la rutina.</p>
+  <p class="seguimiento-texto">Tus entrenamientos generan información. La reviso para saber cómo estás progresando y decidir cuándo necesitamos ajustar el plan.</p>
+  <p class="cadena">Entrenas → registras → reviso → ajustamos → progresas</p>
 
   <a class="cta" id="cta-mid" data-wa data-sitio="servicio" href="#">QUIERO CONTARTE MI CASO</a>
 
