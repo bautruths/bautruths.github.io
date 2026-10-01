@@ -437,6 +437,18 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
   width:6px;height:6px;background:var(--copper);transform:rotate(45deg);
 }
 
+/* Las conversaciones con clientes: una debajo de otra en el móvil, porque en
+   dos columnas no se leería el texto de WhatsApp; en pantalla ancha, a dos. */
+.charlas{display:grid;grid-template-columns:1fr;gap:1.3rem}
+@media (min-width:34rem){ .charlas{grid-template-columns:1fr 1fr;align-items:start} }
+.charla{margin:0}
+.charla figcaption{margin:0 0 .42rem;color:var(--copper)}
+.charla img{
+  display:block;width:100%;height:auto;
+  border:1px solid var(--rule-strong);border-radius:9px;background:#111b21;
+}
+.pruebas-nota.abajo{margin:1rem 0 0;font-size:.86rem}
+
 /* Seguimiento */
 .seguimiento-texto{margin:.5rem 0 0;color:var(--muted);font-size:1rem}
 .cadena{
@@ -654,16 +666,35 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 
   <!-- ── 5. Prueba: lo que dicen ── -->
   <h2 class="shead"><span class="tag">Personas que ya entrenan conmigo</span></h2>
-  <p class="pruebas-nota">Mensajes de clientes, tal cual me llegan. Sin nombres, por respeto a ellos.</p>
-  <div class="pruebas">
-    <img src="op1.jpg" width="720" height="390" loading="lazy" alt="Cliente: «muchísimas gracias tío, de verdad que sin ti dudo que lo hubiera conseguido»">
-    <img src="op2.jpg" width="720" height="382" loading="lazy" alt="Cliente: no ha tenido dudas con ningún ejercicio y está contento con el plan">
-    <img src="op3.jpg" width="720" height="509" loading="lazy" alt="Cliente: el nuevo entrenamiento de pierna le ha gustado mucho">
-    <img src="op4.jpg" width="720" height="612" loading="lazy" alt="Cliente: «me estás ayudando muchísimo»">
-    <img src="op5.jpg" width="720" height="535" loading="lazy" alt="Cliente valorando el entrenamiento con un 10 sobre 10">
-    <img src="op6.jpg" width="720" height="529" loading="lazy" alt="Clienta sorprendida con la aplicación">
+  <p class="bloque-lead">No tienes que creerme. Mira lo que dicen quienes ya entrenan conmigo.</p>
+  <div class="charlas">
+    <figure class="charla">
+      <figcaption class="tag">La app</figcaption>
+      <img src="op6.jpg" width="720" height="529" loading="lazy"
+           alt="Clienta: «me he quedado loca con lo de la aplicación, mola mucho», y le resuelvo cómo repartir los días">
+    </figure>
+    <figure class="charla">
+      <figcaption class="tag">Seguimiento</figcaption>
+      <img src="op2.jpg" width="720" height="382" loading="lazy"
+           alt="Le pregunto si ha tenido dudas con algún ejercicio: «de momento en ninguno» y «estoy bastante contento con el plan»">
+    </figure>
+    <figure class="charla">
+      <figcaption class="tag">Progresión</figcaption>
+      <img src="op4.jpg" width="720" height="612" loading="lazy"
+           alt="Le digo que está mejorando en el entrenamiento y responde: «me estás ayudando muchísimo»">
+    </figure>
+    <figure class="charla">
+      <figcaption class="tag">El entreno</figcaption>
+      <img src="op3.jpg" width="720" height="509" loading="lazy"
+           alt="Cliente: «el nuevo entrenamiento de pierna me ha molado mucho, he apretado y me he sentido muy bien haciéndolo»">
+    </figure>
+    <figure class="charla">
+      <figcaption class="tag">El resultado</figcaption>
+      <img src="op1.jpg" width="720" height="390" loading="lazy"
+           alt="Le digo que se está poniendo muy fuerte y responde: «muchísimas gracias, de verdad que sin ti dudo que lo hubiera conseguido»">
+    </figure>
   </div>
-  <p class="desliza">→ Desliza para ver más</p>
+  <p class="pruebas-nota abajo">Conversaciones reales con clientes de BAUTRUTHS. Sin nombres, por respeto a ellos.</p>
 
   <!-- ── 6. El filtro ── -->
   <h2 class="shead"><span class="tag">Esto no va contigo si</span></h2>
