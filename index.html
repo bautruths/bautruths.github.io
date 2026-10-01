@@ -416,6 +416,19 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 /* "Vas al gimnasio, pero…" justo encima de la lista del problema */
 .antes-lista{margin:0 0 .55rem;color:var(--text);font-size:1.02rem}
 
+/* Los cuatro pasos, en grande y con la flecha de uno al siguiente */
+.steps.grandes .step{gap:1.1rem;padding:1.25rem 0}
+.steps.grandes .step-n{
+  font-size:1.35rem;line-height:1;padding-top:.05rem;
+  min-width:2.05rem;text-align:center;
+}
+.steps.grandes .step:not(:last-child) .step-n::after{
+  content:"↓";display:block;margin-top:.5rem;
+  font-size:.95rem;font-weight:400;opacity:.5;
+}
+.steps.grandes .step h3{font-size:1.08rem;margin-bottom:.3rem}
+.steps.grandes .step p{font-size:1rem}
+
 /* El remate del problema: frase corta, en cobre, sin botón detrás */
 .remate{
   margin:1.3rem 0 0;
@@ -553,13 +566,38 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 
   <!-- ── 3. Qué haces exactamente ── -->
   <h2 class="shead" id="como-funciona"><span class="tag">Cómo funciona</span></h2>
-  <ul class="incluye conicono">
-    <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11l3 3v13H5zM16 4v3h3M8 12h8M8 16h5"/></svg><span><strong>Tu plan se adapta a ti</strong>Tu objetivo, tu nivel, los días que tienes y el material del que dispones.</span></li>
-    <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9v6M17.5 9v6M4 10.5v3M20 10.5v3M6.5 12h11"/></svg><span><strong>Sabes qué hacer cada día</strong>Lo tienes preparado en la app. No llegas a improvisar.</span></li>
-    <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 16v-4M12.5 16V8M17 16v-6"/></svg><span><strong>Sabes cuándo progresar</strong>Ves lo que levantaste la vez anterior y qué toca superar.</span></li>
-    <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10.4 8.8l5.2 3.2-5.2 3.2z"/></svg><span><strong>Cada ejercicio con su vídeo</strong>Si dudas de cómo se hace, tienes mi explicación.</span></li>
-    <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.6 12S6.2 5.8 12 5.8 21.4 12 21.4 12 17.8 18.2 12 18.2 2.6 12 2.6 12z"/><circle cx="12" cy="12" r="2.7"/></svg><span><strong>Yo reviso tu evolución</strong>Veo cómo entrenas y ajusto el plan cuando hace falta.</span></li>
-  </ul>
+  <p class="bloque-lead">Tú no necesitas otra rutina. Necesitas saber exactamente qué hacer cuando entrenas.</p>
+  <ol class="steps grandes">
+    <li class="step">
+      <span class="step-n">01</span>
+      <div>
+        <h3>Me cuentas tu situación</h3>
+        <p>Objetivo, experiencia, disponibilidad, material y contexto.</p>
+      </div>
+    </li>
+    <li class="step">
+      <span class="step-n">02</span>
+      <div>
+        <h3>Yo diseño tu entrenamiento</h3>
+        <p>Creo la planificación adaptada a ti.</p>
+      </div>
+    </li>
+    <li class="step">
+      <span class="step-n">03</span>
+      <div>
+        <h3>Tú abres la app y entrenas</h3>
+        <p>Todo está preparado: ejercicios, series, repeticiones, descansos, intensidad y vídeos.</p>
+      </div>
+    </li>
+    <li class="step">
+      <span class="step-n">04</span>
+      <div>
+        <h3>Analizamos y progresamos</h3>
+        <p>Registras tus sesiones. Yo reviso tu evolución y ajusto cuando sea necesario.</p>
+      </div>
+    </li>
+  </ol>
+  <p class="remate">Esto es BAUTRUTHS.</p>
 
   <figure class="app-vista">
     <img src="app.jpg" width="620" height="1216" loading="lazy"
