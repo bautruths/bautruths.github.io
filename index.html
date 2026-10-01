@@ -413,6 +413,17 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 /* Entradilla de sección */
 .bloque-lead{margin:0 0 1.2rem;color:var(--muted);font-size:1rem}
 
+/* "Vas al gimnasio, pero…" justo encima de la lista del problema */
+.antes-lista{margin:0 0 .55rem;color:var(--text);font-size:1.02rem}
+
+/* El remate del problema: frase corta, en cobre, sin botón detrás */
+.remate{
+  margin:1.3rem 0 0;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:1.06rem;line-height:1.4;
+  color:var(--copper);
+}
+
 /* La frase corta que remata la entrada: va en blanco, no en gris */
 .thesis p.lead2{margin:.65rem 0 0;color:var(--text);font-size:1.02rem}
 
@@ -527,17 +538,18 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
     <p class="sin">Sin rutinas genéricas · Sin improvisar · Sin vivir en el gimnasio</p>
   </section>
 
-  <!-- ── 2. Que se reconozca ── -->
-  <h2 class="shead"><span class="tag">Si esto te suena</span></h2>
+  <!-- ── 2. El problema ── -->
+  <h2 class="shead"><span class="tag">El problema</span></h2>
+  <p class="bloque-lead">El problema no es que tengas poco tiempo. Es que probablemente estás desperdiciando parte del que tienes.</p>
+  <p class="antes-lista">Vas al gimnasio, pero…</p>
   <ul class="espejo">
-    <li>Tienes poco tiempo para entrenar y quieres aprovecharlo.</li>
-    <li>Vas al gimnasio, pero muchas veces no sabes si lo estás haciendo bien.</li>
-    <li>No sabes cuánto peso usar ni cuándo subirlo.</li>
-    <li>Empiezas motivado y acabas perdiendo la constancia.</li>
-    <li>No quieres vivir en el gimnasio. Quieres entrenar bien y punto.</li>
+    <li>No sabes exactamente qué hacer.</li>
+    <li>No sabes cuándo subir peso.</li>
+    <li>Cambias de rutina constantemente.</li>
+    <li>Tienes demasiada información y nadie te dice qué aplicar.</li>
+    <li>No quieres convertir el gimnasio en tu segunda casa.</li>
   </ul>
-  <p class="bloque-lead" style="margin-top:1.2rem">Entonces probablemente pueda ayudarte.</p>
-  <a class="cta" id="cta-suena" data-wa data-sitio="suena" href="#">HABLAR CON SAMUEL</a>
+  <p class="remate">Tener una lista de ejercicios no significa tener un entrenamiento.</p>
 
   <!-- ── 3. Qué haces exactamente ── -->
   <h2 class="shead" id="como-funciona"><span class="tag">Cómo funciona</span></h2>
