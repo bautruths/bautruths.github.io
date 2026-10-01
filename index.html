@@ -448,6 +448,45 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 .incluye.conicono li::before{display:none}
 .incluye.conicono li{gap:.75rem;align-items:flex-start}
 .incluye.conicono .ico{margin-top:.15rem}
+
+/* ══ Qué contratas (2026-10-01). Lo que se compra y el precio, para que nadie
+      llegue al final pensando "vale, ¿pero qué compro?". ══ */
+.oferta{
+  background:var(--surface);
+  border:1px solid var(--rule-strong);
+  border-top:3px solid var(--copper);
+  padding:1.35rem 1.25rem 1.45rem;
+}
+.oferta-nombre{
+  margin:0;
+  font-family:"Archivo Black",Impact,sans-serif;
+  font-size:1.32rem;line-height:1.12;
+}
+.oferta-sub{margin:.45rem 0 0;color:var(--muted);font-size:.96rem}
+.oferta-lista{list-style:none;margin:1.1rem 0 0;padding:0}
+.oferta-lista li{
+  display:flex;gap:.7rem;align-items:flex-start;
+  padding:.46rem 0;color:var(--text);font-size:.98rem;
+}
+.oferta-lista li::before{
+  content:"✓";flex:0 0 auto;color:var(--copper);
+  font-family:"Archivo",system-ui,sans-serif;font-weight:600;
+}
+.precio{
+  display:flex;align-items:baseline;gap:.65rem;
+  margin:1.25rem 0 0;padding-top:1.15rem;
+  border-top:1px solid var(--rule);
+}
+.precio b{
+  font-family:"Archivo Black",Impact,sans-serif;
+  font-size:2.1rem;line-height:1;color:var(--copper);
+  font-variant-numeric:tabular-nums;
+}
+.precio span{
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);
+}
 </style>
 
 </head>
@@ -542,6 +581,24 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
   </div>
   <a class="cta" id="cta-bio" data-wa data-sitio="bio" href="#">HABLAR CONMIGO</a>
 
+  <!-- ── 7b. Qué contratas ── -->
+  <h2 class="shead"><span class="tag">Qué contratas</span></h2>
+  <section class="oferta">
+    <p class="oferta-nombre">12 semanas entrenando conmigo</p>
+    <p class="oferta-sub">Entrenamiento personalizado, uno a uno y online.</p>
+    <ul class="oferta-lista">
+      <li>Tu planificación hecha a mano, no una plantilla</li>
+      <li>Tu app con el entrenamiento de cada día</li>
+      <li>Series, repeticiones e intensidad marcadas</li>
+      <li>Cada ejercicio con mi vídeo</li>
+      <li>Reviso lo que registras y ajusto el plan</li>
+      <li>WhatsApp directo conmigo</li>
+    </ul>
+    <p class="precio"><b>220 €</b><span>las 12 semanas</span></p>
+    <a class="cta" id="cta-oferta" data-wa data-sitio="oferta" href="#">QUIERO CONTARTE MI CASO</a>
+    <p class="cta-note">Escribirme no cuesta nada. Te digo cómo lo haría en tu caso y decides.</p>
+  </section>
+
   <!-- ── 8. Dudas ── -->
   <h2 class="shead"><span class="tag">Preguntas frecuentes</span></h2>
   <div class="faq">
@@ -586,7 +643,7 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 
 <div class="sticky" id="sticky">
   <div class="wrap">
-    <a class="cta" data-wa href="#">QUIERO QUE VEAS MI CASO</a>
+    <a class="cta" data-wa data-sitio="barra" href="#">QUIERO CONTARTE MI CASO</a>
   </div>
 
 <script>
