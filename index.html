@@ -642,7 +642,8 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
     <p class="lead">Entrenamiento personalizado para personas con poco tiempo que quieren mejorar su físico sin perder horas en el gimnasio.</p>
     <p class="lead2">Yo pienso tu entrenamiento. Tú solo tienes que ejecutarlo.</p>
 
-    <a class="cta" id="cta-funciona" href="#como-funciona">QUIERO VER CÓMO FUNCIONA</a>
+    <a class="cta" id="cta-top" data-wa data-sitio="arriba" href="#">QUIERO HABLAR CON SAMUEL</a>
+    <p class="cta-note">Te explico cómo funciona y vemos si tiene sentido para ti.</p>
     <p class="sin">Sin rutinas genéricas · Sin improvisar · Sin vivir en el gimnasio</p>
   </section>
 
@@ -943,15 +944,6 @@ function mensaje() {
   const url = "https://wa.me/" + TEL + "?text=" + encodeURIComponent(mensaje());
   for (const a of document.querySelectorAll("[data-wa]")) a.href = url;
 })();
-
-// ── El botón de arriba no abre WhatsApp: baja a "Cómo funciona".
-//    El salto lo hace el propio enlace (#como-funciona), que funciona aunque
-//    falle el JavaScript. Aquí solo se cuenta, para saber cuánta gente quiere
-//    ver antes de escribir.
-const verFunciona = document.getElementById("cta-funciona");
-if (verFunciona) {
-  verFunciona.addEventListener("click", function () { contar("ver-como-funciona"); });
-}
 
 // ── La barra fija sale solo cuando ningún botón grande se ve ENTERO.
 //    Si un botón solo asoma por abajo, no cuenta: en móviles pequeños el de
