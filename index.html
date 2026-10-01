@@ -416,10 +416,21 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 /* "Vas al gimnasio, pero…" justo encima de la lista del problema */
 .antes-lista{margin:0 0 .55rem;color:var(--text);font-size:1.02rem}
 
-/* La captura de la app, en grande: es la demostración, no un adorno.
-   El <figure> trae 40 px de margen del navegador y recortaba la imagen. */
-.app-vista.grande{margin:0 0 1.1rem}
-.app-vista.grande img{width:min(100%,330px)}
+/* Las tres pantallas de la app, cada una con lo que demuestra debajo.
+   Van en columna: una captura de móvil a media columna no se lee.
+   Ojo: el <figure> trae 40 px de margen del navegador, por eso el margin:0. */
+.pantallas{display:grid;gap:1.7rem;justify-items:center}
+.pantalla{margin:0;max-width:300px}
+.pantalla img{
+  display:block;width:100%;height:auto;
+  border:1px solid var(--rule-strong);border-radius:12px;background:#0b0b0b;
+}
+.pantalla figcaption{margin-top:.65rem;color:var(--muted);font-size:.93rem;text-align:center}
+.pantalla figcaption strong{
+  display:block;margin-bottom:.12rem;color:var(--copper);
+  font-family:"Archivo",system-ui,sans-serif;font-weight:600;font-size:.96rem;
+}
+@media (min-width:34rem){ .pantallas{grid-template-columns:1fr 1fr;align-items:start} }
 
 /* Lo que ves dentro de la app, en cuatro fichas */
 .app-datos{
@@ -685,12 +696,24 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 
   <!-- ── 5. La app ── -->
   <h2 class="shead"><span class="tag">La app</span></h2>
-  <p class="bloque-lead">Esto es lo que ves cuando llegas al gimnasio.</p>
-  <figure class="app-vista grande">
-    <img src="app.jpg" width="620" height="1216" loading="lazy"
-         alt="La app de BAUTRUTHS: el entrenamiento del día con series, repeticiones, descansos y los pesos registrados">
-  </figure>
-  <p class="antes-lista">No tienes que pensar qué toca. Abres la aplicación y tienes delante el entrenamiento que tienes que hacer.</p>
+  <p class="bloque-lead">Esto es lo que ves cuando llegas al gimnasio. No tienes que pensar qué toca: abres la aplicación y tienes delante el entrenamiento que toca hacer.</p>
+  <div class="pantallas">
+    <figure class="pantalla">
+      <img src="app.jpg" width="620" height="1216" loading="lazy"
+           alt="La app de BAUTRUTHS: la semana con sus bloques de torso y pierna, con los ejercicios y las series de cada día">
+      <figcaption><strong>Tu semana</strong>Cada día, con sus ejercicios y sus series.</figcaption>
+    </figure>
+    <figure class="pantalla">
+      <img src="app2.jpg" width="660" height="1349" loading="lazy"
+           alt="Pantalla de un ejercicio: series marcadas, la clave de la técnica, lo que levantó la última vez y el teclado para apuntar kilos y repeticiones">
+      <figcaption><strong>Cada serie, apuntada</strong>Pones los kilos y las repeticiones, y ves lo que levantaste la última vez.</figcaption>
+    </figure>
+    <figure class="pantalla">
+      <img src="app3.jpg" width="660" height="1266" loading="lazy"
+           alt="Ficha del ejercicio remo alto unilateral en máquina, con el vídeo de Samuel y la explicación de la técnica">
+      <figcaption><strong>Cada ejercicio, con mi vídeo</strong>Grabado por mí, con la técnica explicada debajo.</figcaption>
+    </figure>
+  </div>
   <ul class="app-datos">
     <li>Series y repeticiones</li>
     <li>Intensidad (RIR)</li>
