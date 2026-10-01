@@ -449,6 +449,41 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 }
 .pruebas-nota.abajo{margin:1rem 0 0;font-size:.86rem}
 
+/* Las dos listas de "¿Es para ti?": ✓ en cobre y ✕ en gris, sobre la misma
+   lista de siempre (hay que anular el guion que trae .espejo li::before). */
+.sublista{
+  margin:0 0 .6rem;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:1rem;color:var(--text);
+}
+.sublista.fuera{margin-top:1.8rem}
+.espejo.si li::before,.espejo.no li::before{
+  content:"✓";
+  width:auto;height:auto;margin-top:0;
+  background:none;border:0;transform:none;opacity:1;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:1rem;line-height:1.55;
+  color:var(--copper);
+}
+.espejo.no li::before{content:"✕";color:var(--muted)}
+.espejo.si li{color:var(--text)}
+
+/* El remate de la oferta, justo encima del botón */
+.oferta-remate{margin:1rem 0 0;color:var(--muted);font-size:.95rem}
+
+/* La foto de progreso del cliente */
+.resultado{margin:0;text-align:center}
+.resultado img{
+  display:block;margin:0 auto;
+  width:min(100%,330px);height:auto;
+  border:1px solid var(--rule-strong);border-radius:9px;
+}
+.resultado figcaption{
+  margin-top:.7rem;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:.74rem;letter-spacing:.03em;color:var(--muted);
+}
+
 /* Seguimiento */
 .seguimiento-texto{margin:.5rem 0 0;color:var(--muted);font-size:1rem}
 .cadena{
@@ -696,32 +731,49 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
   </div>
   <p class="pruebas-nota abajo">Conversaciones reales con clientes de BAUTRUTHS. Sin nombres, por respeto a ellos.</p>
 
-  <!-- ── 6. El filtro ── -->
-  <h2 class="shead"><span class="tag">Esto no va contigo si</span></h2>
-  <ul class="espejo no">
-    <li>Buscas una rutina genérica para hacer por tu cuenta.</li>
-    <li>Quieres resultados sin entrenar ni ser constante.</li>
-    <li>Quieres que te diga qué hacer, pero no estás dispuesto a hacerlo.</li>
-  </ul>
+  <!-- ── 5b. Y los resultados ── -->
+  <h2 class="shead"><span class="tag">Y sí, los resultados también hablan</span></h2>
+  <figure class="resultado">
+    <img src="res1.jpg" width="947" height="1600" loading="lazy"
+         alt="Cliente de BAUTRUTHS, antes y después: de 74 kg a 82 kg">
+    <figcaption>Cliente de BAUTRUTHS, entrenando conmigo. Publicada con su permiso.</figcaption>
+  </figure>
 
+  <!-- ── 6. El filtro ── -->
   <!-- ── 7. Quién soy ── -->
   <h2 class="shead"><span class="tag">Quién te va a contestar</span></h2>
   <div class="bio">
     <img class="bio-foto" src="samuel.jpg" width="1179" height="1572" loading="lazy"
          alt="Samuel Rodríguez Baudru en el gimnasio, con la camiseta de BAUTRUTHS">
     <div class="bio-texto">
-      <p>Soy <strong>Samuel</strong>, y mi trabajo es que el gimnasio deje de ser un lío.</p>
-      <p>Soy entrenador personal, graduado en Ciencias de la Actividad Física y el Deporte, y llevo años estudiando cómo hacer que entrenar sea más sencillo y más efectivo. Empecé readaptando lesiones y preparando atletas, y de ahí pasé al entrenamiento personal.</p>
-      <p>No quiero que dependas de rutinas aleatorias ni que tengas que convertirte en experto en fitness para progresar. Quiero que sepas qué hacer, por qué lo haces y cómo mejorar.</p>
+      <p>Soy <strong>Samuel</strong>. Y mi trabajo es que el gimnasio deje de ser un lío.</p>
+      <p>Soy entrenador personal, graduado en Ciencias de la Actividad Física y el Deporte.</p>
+      <p>Mi objetivo con BAUTRUTHS es sencillo: utilizar la evidencia y mi experiencia para decidir qué merece la pena hacer y convertirlo en un entrenamiento que puedas ejecutar sin complicarte la vida.</p>
     </div>
   </div>
-  <a class="cta" id="cta-bio" data-wa data-sitio="bio" href="#">HABLAR CONMIGO</a>
+
+  <!-- ── 7b. Para quién es ── -->
+  <h2 class="shead"><span class="tag">¿Es para ti?</span></h2>
+  <p class="sublista">BAUTRUTHS es para ti si…</p>
+  <ul class="espejo si">
+    <li>Tienes poco tiempo para entrenar.</li>
+    <li>Quieres mejorar tu físico.</li>
+    <li>Estás cansado de improvisar.</li>
+    <li>No sabes si estás entrenando correctamente.</li>
+    <li>Quieres que alguien se encargue de estructurar tu entrenamiento.</li>
+  </ul>
+  <p class="sublista fuera">Y no es para ti si…</p>
+  <ul class="espejo no">
+    <li>Quieres una rutina genérica.</li>
+    <li>Buscas resultados sin entrenar.</li>
+    <li>No estás dispuesto a ser constante.</li>
+  </ul>
 
   <!-- ── 7b. Qué contratas ── -->
   <h2 class="shead"><span class="tag">Qué contratas</span></h2>
   <section class="oferta">
-    <p class="oferta-nombre">12 semanas entrenando conmigo</p>
-    <p class="oferta-sub">Entrenamiento personalizado, uno a uno y online.</p>
+    <p class="oferta-nombre">12 semanas de BAUTRUTHS</p>
+    <p class="oferta-sub">Entrenamiento personalizado 1:1, online.</p>
     <ul class="oferta-lista">
       <li>Tu planificación hecha a mano, no una plantilla</li>
       <li>Tu app con el entrenamiento de cada día</li>
@@ -731,7 +783,8 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
       <li>WhatsApp directo conmigo</li>
     </ul>
     <p class="precio"><b>220 €</b><span>las 12 semanas</span></p>
-    <a class="cta" id="cta-oferta" data-wa data-sitio="oferta" href="#">QUIERO CONTARTE MI CASO</a>
+    <p class="oferta-remate">Todo lo que necesitas para saber qué hacer, cómo hacerlo y cómo progresar durante 12 semanas.</p>
+    <a class="cta" id="cta-oferta" data-wa data-sitio="oferta" href="#">QUIERO HABLAR CON SAMUEL</a>
     <p class="cta-note">Escribirme no cuesta nada. Te digo cómo lo haría en tu caso y decides.</p>
   </section>
 
@@ -758,19 +811,14 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
       <summary>¿Qué pasa después de las 12 semanas?</summary>
       <p>Al acabar lo vemos juntos: si quieres seguir, renovamos otras 12 semanas.</p>
     </details>
-    <details>
-      <summary>¿Cómo empiezo?</summary>
-      <p>Me escribes por WhatsApp, me cuentas tu situación y vemos si puedo ayudarte. Sin pagar nada y sin compromiso.</p>
-    </details>
   </div>
 
   <!-- ── 9. Cierre ── -->
   <section class="closing">
-    <h2 class="closing-title">Cuéntame tu caso.</h2>
-
-
+    <h2 class="closing-title">¿Quieres dejar de improvisar tus entrenamientos?</h2>
+    <p class="closing-lead">Cuéntame qué quieres conseguir, cuánto tiempo tienes y cómo estás entrenando actualmente. Te responderé personalmente.</p>
     <a class="cta" id="cta-end" data-wa data-sitio="final" href="#">QUIERO CONTARTE MI CASO</a>
-    <p class="cta-note">Te responderé personalmente. Si lo prefieres, por <a href="https://ig.me/m/bautruths">Instagram</a>.</p>
+    <p class="cta-note">Sin formularios. Sin llamadas. Sin compromiso. Si lo prefieres, por <a href="https://ig.me/m/bautruths">Instagram</a>.</p>
   </section>
 
   <footer>
