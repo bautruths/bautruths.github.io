@@ -878,6 +878,69 @@ body{
 }
 .cierre .cta-note{margin-top:.9rem}
 
+/* ══ Pantalla grande (2026-10-03) ═══════════════════════════════════════
+   En ordenador la página era una columna de móvil con dos franjas negras a
+   los lados. A partir de 62 rem se reparte de verdad: retrato en la entrada,
+   pasos a dos, capturas en fila y preguntas a dos columnas. El texto nunca
+   pasa de 38 rem, que es lo que se lee cómodo. ══ */
+/* Tabletas: la columna de móvil se queda angosta en 800 px */
+@media (min-width:48rem) and (max-width:61.99rem){
+  .wrap{width:min(100% - 3.5rem,44rem)}
+  .thesis h1{font-size:3.1rem}
+}
+
+@media (min-width:62rem){
+  .wrap{width:min(100% - 4rem,62rem)}
+  main > p{max-width:38rem}
+  .shead{margin-top:5rem}
+
+  /* Entrada a dos columnas, con el retrato a la derecha */
+  .thesis{
+    display:grid;
+    grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
+    gap:0 3.2rem;align-items:center;
+    padding:2.4rem 0 3rem;
+  }
+  .thesis > *{grid-column:1;max-width:30rem}
+  .thesis h1{font-size:4rem;line-height:.96}
+  .thesis::after{
+    content:"";grid-column:2;grid-row:1 / span 7;align-self:stretch;
+    min-height:28rem;
+    background:url("samuel.jpg") center 16% / cover no-repeat;
+    border:1px solid var(--rule-strong);border-radius:18px;
+    box-shadow:0 26px 60px rgba(0,0,0,.45);
+  }
+  .thesis .cta{max-width:24rem}
+  .thesis .cta-note,.thesis .sin{max-width:24rem;text-align:left}
+
+  /* Los cuatro pasos, en cuadrícula */
+  .steps.grandes{display:grid;grid-template-columns:1fr 1fr;gap:0 2.6rem}
+  .steps.grandes .step{border-top:1px solid var(--rule)}
+  .steps.grandes .step:nth-child(-n+2){border-top:0;padding-top:0}
+  .steps.grandes .step:not(:last-child) .step-n::after{content:none}
+
+  /* Las cuatro pantallas de la app, en fila */
+  .pantallas{grid-template-columns:repeat(4,1fr);gap:1.1rem}
+  .pantalla{max-width:none;padding:.7rem .7rem .85rem}
+  .pantalla figcaption{font-size:.86rem}
+
+  /* Testimonios y preguntas, a dos columnas */
+  .charlas{grid-template-columns:1fr 1fr;gap:1.3rem}
+  .faq{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1.1rem;align-items:start}
+  .faq details{margin-bottom:0}
+
+  /* Lo que se compra y el cierre, centrados y sin estirarse */
+  .oferta,.cierre,.video,.resultado{margin-inline:auto}
+  .oferta{max-width:38rem}
+  .cierre{max-width:40rem}
+  .espejo{max-width:38rem}
+  .sublista{max-width:38rem}
+  .app-datos{max-width:38rem}
+
+  /* La barra fija no necesita un botón de 60 rem de ancho */
+  .sticky .cta{max-width:26rem;margin-inline:auto}
+}
+
 /* Las secciones van numeradas: 01, 02, 03… Da sensación de recorrido ordenado
    y de que la página está pensada, no apilada. */
 main{counter-reset:seccion}
@@ -1038,27 +1101,27 @@ main{counter-reset:seccion}
   <div class="charlas">
     <figure class="charla">
       <figcaption class="tag">El resultado</figcaption>
-      <img src="op1.jpg" width="720" height="390" loading="lazy" decoding="async"
+      <img src="op1.jpg" width="660" height="358" loading="lazy" decoding="async"
            alt="Le digo que se está poniendo muy fuerte y responde: «muchísimas gracias, de verdad que sin ti dudo que lo hubiera conseguido»">
     </figure>
     <figure class="charla">
       <figcaption class="tag">La app</figcaption>
-      <img src="op6.jpg" width="720" height="529" loading="lazy" decoding="async"
+      <img src="op6.jpg" width="660" height="485" loading="lazy" decoding="async"
            alt="Clienta: «me he quedado loca con lo de la aplicación, mola mucho», y le resuelvo cómo repartir los días">
     </figure>
     <figure class="charla">
       <figcaption class="tag">Seguimiento</figcaption>
-      <img src="op2.jpg" width="720" height="382" loading="lazy" decoding="async"
+      <img src="op2.jpg" width="660" height="350" loading="lazy" decoding="async"
            alt="Le pregunto si ha tenido dudas con algún ejercicio: «de momento en ninguno» y «estoy bastante contento con el plan»">
     </figure>
     <figure class="charla">
       <figcaption class="tag">Progresión</figcaption>
-      <img src="op4.jpg" width="720" height="612" loading="lazy" decoding="async"
+      <img src="op4.jpg" width="660" height="561" loading="lazy" decoding="async"
            alt="Le digo que está mejorando en el entrenamiento y responde: «me estás ayudando muchísimo»">
     </figure>
     <figure class="charla">
       <figcaption class="tag">El entreno</figcaption>
-      <img src="op3.jpg" width="720" height="509" loading="lazy" decoding="async"
+      <img src="op3.jpg" width="660" height="467" loading="lazy" decoding="async"
            alt="Cliente: «el nuevo entrenamiento de pierna me ha molado mucho, he apretado y me he sentido muy bien haciéndolo»">
     </figure>
   </div>
@@ -1067,7 +1130,7 @@ main{counter-reset:seccion}
   <!-- ── 5b. Y los resultados ── -->
   <h2 class="shead"><span class="tag">Y sí, los resultados también hablan</span></h2>
   <figure class="resultado">
-    <img src="res1.jpg" width="947" height="1600" loading="lazy" decoding="async"
+    <img src="res1.jpg" width="660" height="1115" loading="lazy" decoding="async"
          alt="Cliente de BAUTRUTHS, antes y después: de 74 kg a 82 kg">
     <figcaption>Cliente de BAUTRUTHS, entrenando conmigo. Publicada con su permiso.</figcaption>
   </figure>
@@ -1076,7 +1139,7 @@ main{counter-reset:seccion}
   <!-- ── 7. Quién soy ── -->
   <h2 class="shead"><span class="tag">Quién te va a contestar</span></h2>
   <div class="bio">
-    <img class="bio-foto" src="samuel.jpg" width="1179" height="1572" loading="lazy" decoding="async"
+    <img class="bio-foto" src="samuel.jpg" width="900" height="1200" loading="lazy" decoding="async"
          alt="Samuel Rodríguez Baudru en el gimnasio, con la camiseta de BAUTRUTHS">
     <div class="bio-texto">
       <p>Soy <strong>Samuel</strong>. Y mi trabajo es que el gimnasio deje de ser un lío.</p>
