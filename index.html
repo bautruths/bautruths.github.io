@@ -4,8 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Entrenamiento personalizado online para gente con poco tiempo. Tu plan hecho a mano por Samuel Rodriguez Baudru, graduado en CCAFD, con tu app, videos de cada ejercicio y seguimiento. 12 semanas, 220 EUR.">
-<meta name="theme-color" content="#0D0D0D">
+<meta name="theme-color" content="#0D0D0D" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF6EF" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://bautruths.github.io/">
+
+<!-- De donde puede cargar cosas esta pagina y de donde no. Si alguien colase
+     codigo, el navegador no le dejaria traerse nada de fuera de esta lista. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://gc.zgo.at; connect-src https://bautruths.goatcounter.com; frame-src https://www.youtube-nocookie.com; form-action 'none'; base-uri 'none'">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
@@ -1027,8 +1032,8 @@ main{counter-reset:seccion}
 <main class="wrap">
 
   <header class="top">
-    <img class="cara" src="cara.jpg" width="240" height="240"
-         alt="Samuel Rodríguez Baudru, entrenador personal online">
+    <picture><source srcset="cara.webp" type="image/webp"><img class="cara" src="cara.jpg" width="240" height="240"
+         alt="Samuel Rodríguez Baudru, entrenador personal online"></picture>
     <p class="wordmark">BAU<span>TRUTHS</span></p>
     <span class="online"><i aria-hidden="true"></i>Entrenador online</span>
   </header>
@@ -1270,8 +1275,8 @@ main{counter-reset:seccion}
   <!-- ── 9. Cierre ── -->
   <section class="closing">
     <div class="cierre">
-      <img class="cierre-cara" src="cara.jpg" width="240" height="240" loading="lazy" decoding="async"
-           alt="Samuel Rodríguez Baudru">
+      <picture><source srcset="cara.webp" type="image/webp"><img class="cierre-cara" src="cara.jpg" width="240" height="240" loading="lazy" decoding="async"
+           alt="Samuel Rodríguez Baudru"></picture>
       <h2 class="closing-title">¿Quieres dejar de improvisar tus entrenamientos?</h2>
       <p class="closing-lead">Cuéntame qué quieres conseguir, cuánto tiempo tienes y cómo estás entrenando actualmente. Te responderé personalmente.</p>
       <a class="cta" id="cta-end" data-wa data-sitio="final" href="https://wa.me/34673658778?text=Hola%20Samuel%2C%20quiero%20contarte%20mi%20caso%2C%20para%20saber%20c%C3%B3mo%20podr%C3%ADas%20ayudarme%20con%20mi%20entrenamiento.">QUIERO CONTARTE MI CASO</a>
@@ -1383,7 +1388,7 @@ if (verVideo) {
     const marco = document.createElement("iframe");
     marco.src = "https://www.youtube-nocookie.com/embed/1j-opGrqFbo?autoplay=1&rel=0&modestbranding=1&playsinline=1";
     marco.title = "Cómo funciona BAUTRUTHS";
-    marco.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share";
+    marco.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
     marco.allowFullscreen = true;
     marco.referrerPolicy = "strict-origin-when-cross-origin";
     verVideo.parentNode.replaceChild(marco, verVideo);
@@ -1400,6 +1405,19 @@ const botones = Array.prototype.slice.call(document.querySelectorAll("[data-wa]"
                      .filter(function (el) { return !bar.contains(el); });
 const cierre = document.querySelector(".closing");
 let vioFinal = false;
+
+// Puntos de control del recorrido: se cuenta la primera vez que cada uno asoma.
+const paradas = [
+  ["el-problema", ".remate"],
+  ["el-video", ".video"],
+  ["la-app", ".pantallas"],
+  ["los-testimonios", ".charlas"],
+  ["quien-soy", ".bio"],
+  ["el-precio", ".oferta"]
+].map(function (par) {
+  const el = document.querySelector(par[1]);
+  return el ? { nombre: par[0], el: el, visto: false } : null;
+}).filter(Boolean);
 
 // ── Aparición al bajar y barra de progreso.
 //    Todo se mide en el mismo scroll que la barra fija: sin IntersectionObserver
@@ -1427,6 +1445,14 @@ function repintar() {
   if (!vioFinal && cierre.getBoundingClientRect().top < alto) {
     vioFinal = true;
     contar("llego-al-final");
+  }
+
+  // Hasta dónde baja la gente. Con esto se ve en qué sección se cortan.
+  for (const p of paradas) {
+    if (!p.visto && p.el.getBoundingClientRect().top < alto - 60) {
+      p.visto = true;
+      contar("llego-a-" + p.nombre);
+    }
   }
 
   // Los bloques entran cuando asoman por abajo. Una vez dentro, se quedan.
