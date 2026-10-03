@@ -892,6 +892,20 @@ body{
   font-family:"Archivo",system-ui,sans-serif;font-size:.8rem;
 }
 
+/* Las imágenes van dentro de <picture>: que el envoltorio no rompa las cajas */
+picture{display:contents}
+
+/* En móviles estrechos (320-380 px) la cabecera se salía de la pantalla y
+   aparecía barra horizontal: la cara, el logo y la etiqueta no caben juntos.
+   Se encogen, y si aun así no cabe, la etiqueta baja a su propia línea. */
+.top{flex-wrap:wrap}
+@media (max-width:23.75rem){
+  .top{gap:.5rem;padding:1rem 0 .9rem}
+  .cara{width:38px;height:38px}
+  .wordmark{font-size:.8rem;letter-spacing:.17em}
+  .online{font-size:.55rem;letter-spacing:.1em;padding:.22rem .5rem}
+}
+
 /* Que el navegador no meta su destello azul ni espere al doble toque */
 a,button,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 
@@ -923,7 +937,9 @@ a,button,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulati
   .thesis::after{
     content:"";grid-column:2;grid-row:1 / span 7;align-self:stretch;
     min-height:28rem;
+    /* WebP si el navegador puede; si no, el JPEG de la línea anterior */
     background:url("samuel.jpg") center 16% / cover no-repeat;
+    background-image:image-set(url("samuel.webp") type("image/webp"), url("samuel.jpg") type("image/jpeg"));
     border:1px solid var(--rule-strong);border-radius:18px;
     box-shadow:0 26px 60px rgba(0,0,0,.45);
   }
@@ -1054,8 +1070,8 @@ main{counter-reset:seccion}
   <p class="bloque-lead">En menos de dos minutos ves qué hago por ti, cómo funciona la aplicación y cómo conseguimos que cada sesión tenga un propósito.</p>
   <div class="video">
     <button type="button" class="video-play" id="ver-video">
-      <img src="video-portada.jpg" width="660" height="1173" loading="lazy" decoding="async"
-           alt="Samuel explicando en vídeo cómo funciona entrenar con BAUTRUTHS">
+      <picture><source srcset="video-portada.webp" type="image/webp"><img src="video-portada.jpg" width="660" height="1173" loading="lazy" decoding="async"
+           alt="Samuel explicando en vídeo cómo funciona entrenar con BAUTRUTHS"></picture>
       <span class="play" aria-hidden="true"></span>
       <span class="video-rotulo">Ver el vídeo · 1:43</span>
     </button>
@@ -1101,23 +1117,23 @@ main{counter-reset:seccion}
   <p class="bloque-lead">Esto es lo que ves cuando llegas al gimnasio. No tienes que pensar qué toca: abres la aplicación y tienes delante el entrenamiento que toca hacer.</p>
   <div class="pantallas">
     <figure class="pantalla">
-      <img src="app.jpg" width="620" height="1216" loading="lazy" decoding="async"
-           alt="La app de BAUTRUTHS: la semana con sus bloques de torso y pierna, con los ejercicios y las series de cada día">
+      <picture><source srcset="app.webp" type="image/webp"><img src="app.jpg" width="620" height="1216" loading="lazy" decoding="async"
+           alt="La app de BAUTRUTHS: la semana con sus bloques de torso y pierna, con los ejercicios y las series de cada día"></picture>
       <figcaption><strong>Tu semana</strong>Cada día, con sus ejercicios y sus series.</figcaption>
     </figure>
     <figure class="pantalla">
-      <img src="app2.jpg" width="660" height="1349" loading="lazy" decoding="async"
-           alt="Pantalla de un ejercicio: series marcadas, la clave de la técnica, lo que levantó la última vez y el teclado para apuntar kilos y repeticiones">
+      <picture><source srcset="app2.webp" type="image/webp"><img src="app2.jpg" width="660" height="1349" loading="lazy" decoding="async"
+           alt="Pantalla de un ejercicio: series marcadas, la clave de la técnica, lo que levantó la última vez y el teclado para apuntar kilos y repeticiones"></picture>
       <figcaption><strong>Cada serie, apuntada</strong>Pones los kilos y las repeticiones, y ves lo que levantaste la última vez.</figcaption>
     </figure>
     <figure class="pantalla">
-      <img src="app3.jpg" width="660" height="1266" loading="lazy" decoding="async"
-           alt="Ficha del ejercicio remo alto unilateral en máquina, con el vídeo de Samuel y la explicación de la técnica">
+      <picture><source srcset="app3.webp" type="image/webp"><img src="app3.jpg" width="660" height="1266" loading="lazy" decoding="async"
+           alt="Ficha del ejercicio remo alto unilateral en máquina, con el vídeo de Samuel y la explicación de la técnica"></picture>
       <figcaption><strong>Cada ejercicio, con mi vídeo</strong>Grabado por mí, con la técnica explicada debajo.</figcaption>
     </figure>
     <figure class="pantalla">
-      <img src="app4.jpg" width="660" height="1320" loading="lazy" decoding="async"
-           alt="Pantalla de progreso: ejercicios subiendo, igual y bajando, kilos movidos en total, media por sesión y series completadas de cada semana">
+      <picture><source srcset="app4.webp" type="image/webp"><img src="app4.jpg" width="660" height="1320" loading="lazy" decoding="async"
+           alt="Pantalla de progreso: ejercicios subiendo, igual y bajando, kilos movidos en total, media por sesión y series completadas de cada semana"></picture>
       <figcaption><strong>Tu progresión</strong>Cuánto llevas hecho del plan, qué ejercicios suben y cuánto peso has movido.</figcaption>
     </figure>
   </div>
@@ -1142,28 +1158,28 @@ main{counter-reset:seccion}
   <div class="charlas">
     <figure class="charla">
       <figcaption class="tag">El resultado</figcaption>
-      <img src="op1.jpg" width="660" height="358" loading="lazy" decoding="async"
-           alt="Le digo que se está poniendo muy fuerte y responde: «muchísimas gracias, de verdad que sin ti dudo que lo hubiera conseguido»">
+      <picture><source srcset="op1.webp" type="image/webp"><img src="op1.jpg" width="660" height="358" loading="lazy" decoding="async"
+           alt="Le digo que se está poniendo muy fuerte y responde: «muchísimas gracias, de verdad que sin ti dudo que lo hubiera conseguido»"></picture>
     </figure>
     <figure class="charla">
       <figcaption class="tag">La app</figcaption>
-      <img src="op6.jpg" width="660" height="485" loading="lazy" decoding="async"
-           alt="Clienta: «me he quedado loca con lo de la aplicación, mola mucho», y le resuelvo cómo repartir los días">
+      <picture><source srcset="op6.webp" type="image/webp"><img src="op6.jpg" width="660" height="485" loading="lazy" decoding="async"
+           alt="Clienta: «me he quedado loca con lo de la aplicación, mola mucho», y le resuelvo cómo repartir los días"></picture>
     </figure>
     <figure class="charla">
       <figcaption class="tag">Seguimiento</figcaption>
-      <img src="op2.jpg" width="660" height="350" loading="lazy" decoding="async"
-           alt="Le pregunto si ha tenido dudas con algún ejercicio: «de momento en ninguno» y «estoy bastante contento con el plan»">
+      <picture><source srcset="op2.webp" type="image/webp"><img src="op2.jpg" width="660" height="350" loading="lazy" decoding="async"
+           alt="Le pregunto si ha tenido dudas con algún ejercicio: «de momento en ninguno» y «estoy bastante contento con el plan»"></picture>
     </figure>
     <figure class="charla">
       <figcaption class="tag">Progresión</figcaption>
-      <img src="op4.jpg" width="660" height="561" loading="lazy" decoding="async"
-           alt="Le digo que está mejorando en el entrenamiento y responde: «me estás ayudando muchísimo»">
+      <picture><source srcset="op4.webp" type="image/webp"><img src="op4.jpg" width="660" height="561" loading="lazy" decoding="async"
+           alt="Le digo que está mejorando en el entrenamiento y responde: «me estás ayudando muchísimo»"></picture>
     </figure>
     <figure class="charla">
       <figcaption class="tag">El entreno</figcaption>
-      <img src="op3.jpg" width="660" height="467" loading="lazy" decoding="async"
-           alt="Cliente: «el nuevo entrenamiento de pierna me ha molado mucho, he apretado y me he sentido muy bien haciéndolo»">
+      <picture><source srcset="op3.webp" type="image/webp"><img src="op3.jpg" width="660" height="467" loading="lazy" decoding="async"
+           alt="Cliente: «el nuevo entrenamiento de pierna me ha molado mucho, he apretado y me he sentido muy bien haciéndolo»"></picture>
     </figure>
   </div>
   <p class="pruebas-nota abajo">Conversaciones reales con clientes de BAUTRUTHS. Sin nombres, por respeto a ellos.</p>
@@ -1171,8 +1187,8 @@ main{counter-reset:seccion}
   <!-- ── 5b. Y los resultados ── -->
   <h2 class="shead"><span class="tag">Y sí, los resultados también hablan</span></h2>
   <figure class="resultado">
-    <img src="res1.jpg" width="660" height="1115" loading="lazy" decoding="async"
-         alt="Cliente de BAUTRUTHS, antes y después: de 74 kg a 82 kg">
+    <picture><source srcset="res1.webp" type="image/webp"><img src="res1.jpg" width="660" height="1115" loading="lazy" decoding="async"
+         alt="Cliente de BAUTRUTHS, antes y después: de 74 kg a 82 kg"></picture>
     <figcaption>Cliente de BAUTRUTHS, entrenando conmigo. Publicada con su permiso.</figcaption>
   </figure>
 
@@ -1180,8 +1196,8 @@ main{counter-reset:seccion}
   <!-- ── 7. Quién soy ── -->
   <h2 class="shead"><span class="tag">Quién te va a contestar</span></h2>
   <div class="bio">
-    <img class="bio-foto" src="samuel.jpg" width="900" height="1200" loading="lazy" decoding="async"
-         alt="Samuel Rodríguez Baudru en el gimnasio, con la camiseta de BAUTRUTHS">
+    <picture><source srcset="samuel.webp" type="image/webp"><img class="bio-foto" src="samuel.jpg" width="900" height="1200" loading="lazy" decoding="async"
+         alt="Samuel Rodríguez Baudru en el gimnasio, con la camiseta de BAUTRUTHS"></picture>
     <div class="bio-texto">
       <p>Soy <strong>Samuel</strong>. Y mi trabajo es que el gimnasio deje de ser un lío.</p>
       <p>Soy entrenador personal, graduado en Ciencias de la Actividad Física y el Deporte.</p>
