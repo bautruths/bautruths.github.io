@@ -1405,7 +1405,11 @@ if (verVideo) {
     caja.className = "tras-video";
     const boton = document.createElement("a");
     boton.className = "cta";
-    boton.href = document.getElementById("cta-top").href;
+    // Quien escribe desde aquí ha visto el vídeo: que el mensaje lo diga, para
+    // que Samuel sepa de entrada con quién habla.
+    boton.href = "https://wa.me/" + TEL + "?text=" + encodeURIComponent(
+      "Hola Samuel, acabo de ver tu vídeo y quiero contarte mi caso, para saber cómo podrías ayudarme con mi entrenamiento."
+    );
     boton.textContent = "QUIERO HABLAR CON SAMUEL";
     boton.setAttribute("data-wa", "");
     boton.dataset.sitio = "video";
