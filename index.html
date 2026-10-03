@@ -788,6 +788,75 @@ body{
 .faq details[open]{background:var(--surface-2);border-color:var(--rule-strong)}
 .video-play{transition:transform .2s ease}
 .video-play:active{transform:scale(.995)}
+
+/* ══ Cabecera y cierre (2026-10-03) ══════════════════════════════════════
+   La cabecera repite el logo de la app (BAU claro + TRUTHS cobre) y el
+   cierre deja de ser texto suelto: es una tarjeta con su cara. ══ */
+
+/* ── Cabecera ── */
+.top{padding:1.15rem 0 1rem;border-bottom:1px solid var(--rule)}
+.cara{
+  width:44px;height:44px;
+  border:2px solid var(--copper);
+  box-shadow:0 0 0 4px rgba(184,115,51,.12);
+}
+.wordmark{font-size:.95rem;letter-spacing:.24em}
+.wordmark span{color:var(--copper)}
+.online{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:var(--surface);
+}
+.online i{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--copper);flex:0 0 auto;
+}
+/* La tesis ya no necesita su propia raya: la cabecera trae la suya */
+.thesis{border-top:0;padding-top:1.5rem}
+
+/* ── Cierre ── */
+.closing{border-top:0;padding-top:0;margin-top:3.6rem}
+.cierre{
+  background:var(--surface);
+  border:1px solid var(--rule-strong);
+  border-top:3px solid var(--copper);
+  border-radius:var(--r);
+  padding:1.6rem 1.3rem 1.7rem;
+  text-align:center;
+}
+.cierre-cara{
+  display:block;margin:0 auto .9rem;
+  width:76px;height:76px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--copper);
+  box-shadow:0 0 0 5px rgba(184,115,51,.1);
+}
+.cierre .closing-title{font-size:clamp(1.4rem,6vw,1.8rem);margin-bottom:.9rem}
+.cierre .closing-lead{margin:0 0 1.2rem;font-size:.99rem}
+.cierre .cta{margin-top:0}
+
+/* Los tres "sin", en fichas, debajo del botón */
+.garantias{
+  list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;
+  margin:1rem 0 0;padding:0;
+}
+.garantias li{
+  padding:.34rem .7rem;
+  background:var(--surface-2);border:1px solid var(--rule);
+  border-radius:999px;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:.76rem;letter-spacing:.03em;color:var(--muted);
+}
+.cierre .cta-note{margin-top:.9rem}
+
+/* El "no es para ti" seguía con la marca de borde girado del 20/09, que se leía
+   como una palomita. Aquí se anula del todo y se pone una ✕ de verdad. */
+.espejo.no li::before{
+  content:"✕";
+  width:auto;height:auto;margin-top:0;
+  background:none;border:0;transform:none;opacity:1;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:600;font-size:.92rem;line-height:1.6;
+  color:var(--muted);
+}
 </style>
 
 </head>
@@ -798,8 +867,8 @@ body{
   <header class="top">
     <img class="cara" src="cara.jpg" width="240" height="240"
          alt="Samuel Rodríguez Baudru, entrenador personal online">
-    <p class="wordmark">BAUTRUTHS</p>
-    <span class="online">Entrenador online</span>
+    <p class="wordmark">BAU<span>TRUTHS</span></p>
+    <span class="online"><i aria-hidden="true"></i>Entrenador online</span>
   </header>
 
   <!-- ── 1. El problema, y qué haces con él ── -->
@@ -1031,10 +1100,19 @@ body{
 
   <!-- ── 9. Cierre ── -->
   <section class="closing">
-    <h2 class="closing-title">¿Quieres dejar de improvisar tus entrenamientos?</h2>
-    <p class="closing-lead">Cuéntame qué quieres conseguir, cuánto tiempo tienes y cómo estás entrenando actualmente. Te responderé personalmente.</p>
-    <a class="cta" id="cta-end" data-wa data-sitio="final" href="#">QUIERO CONTARTE MI CASO</a>
-    <p class="cta-note">Sin formularios. Sin llamadas. Sin compromiso. Si lo prefieres, por <a href="https://ig.me/m/bautruths">Instagram</a>.</p>
+    <div class="cierre">
+      <img class="cierre-cara" src="cara.jpg" width="240" height="240" loading="lazy"
+           alt="Samuel Rodríguez Baudru">
+      <h2 class="closing-title">¿Quieres dejar de improvisar tus entrenamientos?</h2>
+      <p class="closing-lead">Cuéntame qué quieres conseguir, cuánto tiempo tienes y cómo estás entrenando actualmente. Te responderé personalmente.</p>
+      <a class="cta" id="cta-end" data-wa data-sitio="final" href="#">QUIERO CONTARTE MI CASO</a>
+      <ul class="garantias">
+        <li>Sin formularios</li>
+        <li>Sin llamadas</li>
+        <li>Sin compromiso</li>
+      </ul>
+      <p class="cta-note">Si lo prefieres, por <a href="https://ig.me/m/bautruths">Instagram</a>.</p>
+    </div>
   </section>
 
   <footer>
@@ -1186,6 +1264,9 @@ function repintar() {
     aparecen = aparecen.filter(function (el) {
       if (el.getBoundingClientRect().top < alto - 40) {
         el.classList.add("visto");
+        // Terminada la entrada, fuera las dos clases: el bloque se queda sin
+        // ninguna regla de opacidad. Si un navegador no animara, igual se ve.
+        setTimeout(function () { el.classList.remove("rv", "visto"); }, 750);
         return false;
       }
       return true;
