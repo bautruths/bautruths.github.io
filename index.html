@@ -10,7 +10,7 @@
 
 <!-- De donde puede cargar cosas esta pagina y de donde no. Si alguien colase
      codigo, el navegador no le dejaria traerse nada de fuera de esta lista. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://gc.zgo.at; connect-src https://bautruths.goatcounter.com; frame-src https://www.youtube-nocookie.com; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; manifest-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://gc.zgo.at; connect-src https://bautruths.goatcounter.com; frame-src https://www.youtube-nocookie.com; form-action 'none'; base-uri 'none'">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
@@ -25,6 +25,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
 <script type="application/ld+json">
 {
@@ -900,6 +901,19 @@ body{
 /* Las imágenes van dentro de <picture>: que el envoltorio no rompa las cajas */
 picture{display:contents}
 
+/* La barra fija lleva su cara al lado del botón: se parece más a un chat con
+   una persona que a un anuncio. Era el botón con menos toques del contador. */
+.barra{display:flex;align-items:center;gap:.7rem}
+.barra-cara{
+  flex:0 0 auto;width:42px;height:42px;border-radius:50%;object-fit:cover;
+  border:1px solid var(--copper);
+}
+.barra .cta{flex:1;margin-top:0;font-size:.92rem;padding:.85rem .6rem}
+@media (max-width:23.75rem){
+  .barra-cara{width:36px;height:36px}
+  .barra .cta{font-size:.85rem}
+}
+
 /* Los botones que abren WhatsApp lo llevan dibujado: así se sabe antes de
    pulsar qué va a pasar, y no hay que fiarse de la letra pequeña. */
 .cta[data-wa]::before{
@@ -1319,7 +1333,8 @@ main{counter-reset:seccion}
 <div class="progreso" aria-hidden="true"></div>
 
 <div class="sticky" id="sticky">
-  <div class="wrap">
+  <div class="wrap barra">
+    <picture><source srcset="cara.webp" type="image/webp"><img class="barra-cara" src="cara.jpg" width="240" height="240" loading="lazy" decoding="async" alt=""></picture>
     <a class="cta" data-wa data-sitio="barra" href="https://wa.me/34673658778?text=Hola%20Samuel%2C%20quiero%20contarte%20mi%20caso%2C%20para%20saber%20c%C3%B3mo%20podr%C3%ADas%20ayudarme%20con%20mi%20entrenamiento.">QUIERO CONTARTE MI CASO</a>
   </div>
 </div>
