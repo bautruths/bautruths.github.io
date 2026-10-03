@@ -882,7 +882,18 @@ body{
   font-family:"Archivo",system-ui,sans-serif;
   font-size:.76rem;letter-spacing:.03em;color:var(--muted);
 }
-.cierre .cta-note{margin-top:.9rem}
+.cierre .cta-note{margin-top:1rem}
+/* El enlace a Instagram medía 14 px de alto: imposible de acertar con el dedo.
+   Pasa a ficha, como las garantías, y ya se puede pulsar. */
+.cierre .cta-note a{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:38px;padding:.3rem .85rem;margin-left:.2rem;
+  background:var(--surface-2);border:1px solid var(--rule);border-radius:999px;
+  font-family:"Archivo",system-ui,sans-serif;font-size:.8rem;
+}
+
+/* Que el navegador no meta su destello azul ni espere al doble toque */
+a,button,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 
 /* ══ Pantalla grande (2026-10-03) ═══════════════════════════════════════
    En ordenador la página era una columna de móvil con dos franjas negras a
