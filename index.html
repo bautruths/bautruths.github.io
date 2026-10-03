@@ -416,6 +416,37 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 /* "Vas al gimnasio, pero…" justo encima de la lista del problema */
 .antes-lista{margin:0 0 .55rem;color:var(--text);font-size:1.02rem}
 
+/* ══ El vídeo. Vertical, como se grabó. Hasta que no se pulsa el play solo hay
+      una imagen: ni iframe, ni peso, ni YouTube mirando. ══ */
+.video{max-width:300px;margin:0 auto}
+.video-play{
+  display:block;position:relative;width:100%;padding:0;
+  border:1px solid var(--rule-strong);border-radius:12px;overflow:hidden;
+  background:#0b0b0b;cursor:pointer;
+}
+.video-play img{display:block;width:100%;height:auto}
+.video-play .play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:68px;height:68px;border-radius:50%;
+  background:var(--copper);
+  box-shadow:0 6px 24px rgba(0,0,0,.45);
+}
+.video-play .play::after{
+  content:"";position:absolute;top:50%;left:54%;transform:translate(-50%,-50%);
+  border-style:solid;border-width:13px 0 13px 21px;
+  border-color:transparent transparent transparent var(--on-copper);
+}
+.video-rotulo{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:.55rem .7rem;
+  background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,0));
+  color:#F2EBE0;
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:.78rem;letter-spacing:.04em;text-align:left;
+}
+.video-play:hover .play,.video-play:focus-visible .play{background:var(--copper-hi)}
+.video iframe{display:block;width:100%;aspect-ratio:9/16;border:1px solid var(--rule-strong);border-radius:12px}
+
 /* Las tres pantallas de la app, cada una con lo que demuestra debajo.
    Van en columna: una captura de móvil a media columna no se lee.
    Ojo: el <figure> trae 40 px de margen del navegador, por eso el margin:0. */
@@ -659,6 +690,19 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
     <li>No quieres convertir el gimnasio en tu segunda casa.</li>
   </ul>
   <p class="remate">Tener una lista de ejercicios no significa tener un entrenamiento.</p>
+
+  <!-- ── 2b. El vídeo. La portada es un fotograma propio: YouTube no se carga
+       (ni sabe quién mira) hasta que alguien pulsa el play. ── -->
+  <h2 class="shead"><span class="tag">Te enseño cómo funciona</span></h2>
+  <p class="bloque-lead">En menos de dos minutos ves qué hago por ti, cómo funciona la aplicación y cómo conseguimos que cada sesión tenga un propósito.</p>
+  <div class="video">
+    <button type="button" class="video-play" id="ver-video">
+      <img src="video-portada.jpg" width="660" height="1173" loading="lazy"
+           alt="Samuel explicando en vídeo cómo funciona entrenar con BAUTRUTHS">
+      <span class="play" aria-hidden="true"></span>
+      <span class="video-rotulo">Ver el vídeo · 1:43</span>
+    </button>
+  </div>
 
   <!-- ── 3. Qué haces exactamente ── -->
   <h2 class="shead" id="como-funciona"><span class="tag">Cómo funciona</span></h2>
@@ -944,6 +988,22 @@ function mensaje() {
   const url = "https://wa.me/" + TEL + "?text=" + encodeURIComponent(mensaje());
   for (const a of document.querySelectorAll("[data-wa]")) a.href = url;
 })();
+
+// ── El vídeo: hasta que no se pulsa, no hay iframe ni petición a YouTube.
+//    Se cuenta como "video" para saber cuántos de los que entran lo ven.
+const verVideo = document.getElementById("ver-video");
+if (verVideo) {
+  verVideo.addEventListener("click", function () {
+    contar("video");
+    const marco = document.createElement("iframe");
+    marco.src = "https://www.youtube-nocookie.com/embed/1j-opGrqFbo?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+    marco.title = "Cómo funciona BAUTRUTHS";
+    marco.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share";
+    marco.allowFullscreen = true;
+    marco.referrerPolicy = "strict-origin-when-cross-origin";
+    verVideo.parentNode.replaceChild(marco, verVideo);
+  });
+}
 
 // ── La barra fija sale solo cuando ningún botón grande se ve ENTERO.
 //    Si un botón solo asoma por abajo, no cuenta: en móviles pequeños el de
