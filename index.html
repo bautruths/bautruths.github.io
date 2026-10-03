@@ -900,6 +900,12 @@ body{
 /* Las imágenes van dentro de <picture>: que el envoltorio no rompa las cajas */
 picture{display:contents}
 
+/* El botón que sale debajo del vídeo en cuanto alguien le da al play */
+.tras-video{margin-top:1.1rem;max-width:300px;margin-inline:auto;animation:asoma .5s ease both}
+.tras-video .cta{font-size:.92rem;padding:.95rem .7rem}
+@keyframes asoma{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){ .tras-video{animation:none} }
+
 /* En móviles estrechos (320-380 px) la cabecera se salía de la pantalla y
    aparecía barra horizontal: la cara, el logo y la etiqueta no caben juntos.
    Se encogen, y si aun así no cabe, la etiqueta baja a su propia línea. */
@@ -1392,6 +1398,23 @@ if (verVideo) {
     marco.allowFullscreen = true;
     marco.referrerPolicy = "strict-origin-when-cross-origin";
     verVideo.parentNode.replaceChild(marco, verVideo);
+
+    // Quien le da al play está interesado: se le pone el botón justo debajo,
+    // sin tener que seguir bajando. Se cuenta aparte (whatsapp-video).
+    const caja = document.createElement("div");
+    caja.className = "tras-video";
+    const boton = document.createElement("a");
+    boton.className = "cta";
+    boton.href = document.getElementById("cta-top").href;
+    boton.textContent = "QUIERO HABLAR CON SAMUEL";
+    boton.setAttribute("data-wa", "");
+    boton.dataset.sitio = "video";
+    const nota = document.createElement("p");
+    nota.className = "cta-note";
+    nota.textContent = "Si te encaja lo que cuento, escríbeme y vemos tu caso.";
+    caja.appendChild(boton);
+    caja.appendChild(nota);
+    marco.parentNode.appendChild(caja);
   });
 }
 
