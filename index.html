@@ -61,7 +61,13 @@
 <title>Entrena mejor. No más. · BAUTRUTHS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300..600&display=swap">
+<!-- Solo los pesos que se usan (400 y 600): la variable de Newsreader traia de
+     300 a 600 y un eje de tamaño optico que no se aprovechaba. Y la hoja se
+     carga sin bloquear el pintado: el texto sale ya, con la tipografia del
+     sistema, y cambia sola en cuanto llega la buena. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600&family=Newsreader:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600&family=Newsreader:wght@400;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600&family=Newsreader:wght@400;600&display=swap"></noscript>
 
 <style>
 /* ── BAUTRUTHS · negro y cobre. Dark-first: :root es el tema de marca. ── */
@@ -941,6 +947,23 @@ body{
   .sticky .cta{max-width:26rem;margin-inline:auto}
 }
 
+/* La franja de datos vuelve (se perdió en la reestructuración del 20/09).
+   Va pegada a la entrada, antes del primer título de sección. */
+.specs{
+  border:1px solid var(--rule-strong);border-radius:var(--r);
+  background:var(--surface);
+  margin-top:.4rem;overflow:hidden;
+}
+.spec b{font-size:1.45rem;color:var(--copper)}
+.spec span{color:var(--muted)}
+.spec + .spec{border-left:1px solid var(--rule)}
+@media (min-width:62rem){
+  .specs{max-width:38rem}
+  .spec b{font-size:1.7rem}
+}
+
+/* El contador de secciones no debe contar la franja de datos */
+
 /* Las secciones van numeradas: 01, 02, 03… Da sensación de recorrido ordenado
    y de que la página está pensada, no apilada. */
 main{counter-reset:seccion}
@@ -992,6 +1015,13 @@ main{counter-reset:seccion}
     <a class="cta" id="cta-top" data-wa data-sitio="arriba" href="https://wa.me/34673658778?text=Hola%20Samuel%2C%20quiero%20contarte%20mi%20caso%2C%20para%20saber%20c%C3%B3mo%20podr%C3%ADas%20ayudarme%20con%20mi%20entrenamiento.">QUIERO HABLAR CON SAMUEL</a>
     <p class="cta-note">Te explico cómo funciona y vemos si tiene sentido para ti.</p>
     <p class="sin">Sin rutinas genéricas · Sin improvisar · Sin vivir en el gimnasio</p>
+  </section>
+
+  <!-- Franja de datos: credibilidad en la primera pantalla, sin tener que leer -->
+  <section class="specs">
+    <div class="spec"><b>+100</b><span class="tag">Casos<br>de éxito</span></div>
+    <div class="spec"><b>180</b><span class="tag">Ejercicios<br>en tu plan</span></div>
+    <div class="spec"><b>134</b><span class="tag">Con vídeo<br>propio</span></div>
   </section>
 
   <!-- ── 2. El problema ── -->
