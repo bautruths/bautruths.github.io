@@ -727,6 +727,67 @@ footer p:first-child{color:var(--text);font-family:"Archivo",system-ui,sans-seri
   .wrap{width:min(100% - 3rem,34rem)}
   .shead{margin-top:4rem}
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   SEGUNDA CAPA (2026-10-03): carácter.
+   Profundidad de fondo, marcos para lo que se enseña, aparición al bajar
+   y barra de progreso. Todo degradado y sin una imagen de más.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root{--brillo:rgba(184,115,51,.17)}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){--brillo:rgba(138,85,31,.12)} }
+:root[data-theme="light"]{--brillo:rgba(138,85,31,.12)}
+
+/* El negro plano se convierte en un fondo con una luz de cobre arriba */
+body{
+  background-image:radial-gradient(115% 46vh at 50% 0,var(--brillo),transparent 72%);
+  background-repeat:no-repeat;
+}
+
+/* Barra de progreso: una línea de cobre que avanza con la lectura */
+.progreso{
+  position:fixed;top:0;left:0;right:0;height:3px;z-index:60;
+  background:linear-gradient(to right,var(--copper),var(--copper-hi));
+  transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .12s linear;
+}
+
+/* Los bloques entran al asomar. Sin JS o con movimiento reducido, se ven igual. */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s cubic-bezier(.22,.68,.36,1)}
+.rv.visto{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){ .rv{opacity:1;transform:none;transition:none} }
+
+/* Lo que se enseña va enmarcado, no pegado sobre el fondo */
+.pantalla{
+  max-width:326px;padding:.85rem .85rem 1rem;
+  background:var(--surface);border:1px solid var(--rule);border-radius:16px;
+}
+.pantalla img{border-radius:10px;border-color:var(--rule)}
+.pantalla figcaption{margin-top:.85rem}
+.resultado img{box-shadow:0 14px 34px rgba(0,0,0,.28)}
+.video-play{box-shadow:0 14px 34px rgba(0,0,0,.3)}
+
+/* Las etiquetas de los testimonios, en píldora */
+.charla figcaption{
+  display:inline-block;margin-bottom:.55rem;padding:.3rem .66rem;
+  background:var(--surface);border:1px solid var(--rule-strong);border-radius:999px;
+  color:var(--copper);
+}
+
+/* Tipografía: menos huérfanas y un titular más compacto */
+.thesis h1{letter-spacing:-.025em}
+.bloque-lead,.thesis p.lead,.closing-lead,.oferta-sub,.pantalla figcaption,.remate{text-wrap:pretty}
+.closing-title{letter-spacing:-.015em}
+
+/* Reacciones al tocar */
+.cta{transition:background .18s ease,transform .14s ease,box-shadow .18s ease}
+.cta:hover,.cta:focus-visible{box-shadow:0 10px 26px rgba(184,115,51,.22)}
+.cta:active{transform:translateY(1px);box-shadow:none}
+.faq summary{transition:color .15s ease}
+.faq details:hover summary{color:var(--copper-hi)}
+.faq details[open]{background:var(--surface-2);border-color:var(--rule-strong)}
+.video-play{transition:transform .2s ease}
+.video-play:active{transform:scale(.995)}
 </style>
 
 </head>
@@ -984,6 +1045,8 @@ footer p:first-child{color:var(--text);font-family:"Archivo",system-ui,sans-seri
 </main>
 
 
+<div class="progreso" aria-hidden="true"></div>
+
 <div class="sticky" id="sticky">
   <div class="wrap">
     <a class="cta" data-wa data-sitio="barra" href="#">QUIERO CONTARTE MI CASO</a>
@@ -1090,6 +1153,20 @@ const botones = Array.prototype.slice.call(document.querySelectorAll("[data-wa]"
 const cierre = document.querySelector(".closing");
 let vioFinal = false;
 
+// ── Aparición al bajar y barra de progreso.
+//    Todo se mide en el mismo scroll que la barra fija: sin IntersectionObserver
+//    ni requestAnimationFrame, que no disparan en algunos visores. Si el
+//    JavaScript fallara, el CSS deja los bloques visibles igualmente.
+const barraProgreso = document.querySelector(".progreso");
+let aparecen = [];
+
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  aparecen = Array.prototype.slice.call(document.querySelectorAll(
+    "main > h2, main > p, main > ul, main > ol, main > div, main > section, main > figure"
+  )).filter(function (el) { return !el.closest(".thesis"); });
+  for (const el of aparecen) el.classList.add("rv");
+}
+
 function repintar() {
   const alto = window.innerHeight;
   const algunoALaVista = botones.some(function (el) {
@@ -1102,6 +1179,23 @@ function repintar() {
   if (!vioFinal && cierre.getBoundingClientRect().top < alto) {
     vioFinal = true;
     contar("llego-al-final");
+  }
+
+  // Los bloques entran cuando asoman por abajo. Una vez dentro, se quedan.
+  if (aparecen.length) {
+    aparecen = aparecen.filter(function (el) {
+      if (el.getBoundingClientRect().top < alto - 40) {
+        el.classList.add("visto");
+        return false;
+      }
+      return true;
+    });
+  }
+
+  if (barraProgreso) {
+    const recorrido = document.documentElement.scrollHeight - alto;
+    const hecho = recorrido > 0 ? Math.min(1, Math.max(0, window.scrollY / recorrido)) : 0;
+    barraProgreso.style.transform = "scaleX(" + hecho + ")";
   }
 }
 
