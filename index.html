@@ -653,6 +653,80 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
   font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
   color:var(--muted);
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   PULIDO ESTÉTICO (2026-10-03)
+   La página se ha ido montando por trozos y cada trozo traía sus propios
+   radios, márgenes y tamaños. Aquí se igualan. Nada de esto cambia textos.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root{
+  --r:12px;    /* tarjetas e imágenes */
+  --r-s:9px;   /* piezas pequeñas */
+  --r-cta:10px;
+}
+
+::selection{background:var(--copper);color:var(--on-copper)}
+
+/* ── 1. Un solo juego de esquinas en toda la página ── */
+.cta{border-radius:var(--r-cta)}
+.oferta,.video-play,.pantalla img,.charla img,.resultado img,.filter,.door{border-radius:var(--r)}
+.app-datos li,.chip,.faq details{border-radius:var(--r-s)}
+.faq details{padding:0 .85rem;background:var(--surface);border:1px solid var(--rule);margin-bottom:.5rem}
+.faq{border-top:0}
+.faq details p{margin-bottom:1rem}
+
+/* ── 2. Ritmo: más aire entre secciones y menos dentro ── */
+.shead{margin:3.4rem 0 1.3rem}
+.thesis{padding-bottom:2.2rem}
+.bloque-lead{margin-bottom:1.35rem;font-size:1.03rem}
+.pantallas{gap:2rem;margin-top:.3rem}
+.charlas{gap:1.5rem}
+.video{margin-top:.2rem}
+.cta{margin-top:1.35rem}
+
+/* La línea de la cabecera de sección se desvanece en vez de cortarse */
+.shead::after{
+  background:linear-gradient(to right,var(--rule-strong),transparent);
+}
+
+/* ── 3. La oferta: la pieza que más se mira ── */
+.oferta{padding:1.5rem 1.35rem 1.6rem}
+.oferta-nombre{font-size:1.24rem;line-height:1.14;letter-spacing:-.01em}
+.oferta .cta{font-size:.98rem;letter-spacing:.01em}
+/* Precio y pago aplazado forman un solo bloque, no dos piezas sueltas */
+.precio{
+  margin-top:1.35rem;padding:1rem 1.1rem .5rem;
+  background:var(--surface-2);
+  border-radius:var(--r-s) var(--r-s) 0 0;
+  border-top:0;
+}
+.precio-alt{
+  margin:0;padding:0 1.1rem .9rem;
+  background:var(--surface-2);
+  border-radius:0 0 var(--r-s) var(--r-s);
+}
+.oferta-remate{margin-top:1.1rem}
+
+/* ── 4. Detalles ── */
+/* El enlace de Instagram del cierre salía en azul de navegador */
+.cta-note a,.bloque-lead a,.pruebas-nota a{
+  color:var(--copper);text-decoration:none;
+  border-bottom:1px solid var(--rule-strong);
+}
+.cta-note a:hover,.cta-note a:focus-visible{border-bottom-color:var(--copper)}
+.step-n{letter-spacing:.02em}
+.sticky{box-shadow:0 -12px 28px rgba(0,0,0,.28)}
+.pantalla figcaption,.resultado figcaption{line-height:1.45}
+.resultado img{margin-bottom:.1rem}
+footer{margin-top:3.4rem;border-top:1px solid var(--rule-strong);padding-top:1.7rem}
+footer p:first-child{color:var(--text);font-family:"Archivo",system-ui,sans-serif;font-weight:600;font-size:.9rem}
+
+/* En pantalla ancha la columna respira un poco más */
+@media (min-width:34rem){
+  .wrap{width:min(100% - 3rem,34rem)}
+  .shead{margin-top:4rem}
+}
 </style>
 
 </head>
