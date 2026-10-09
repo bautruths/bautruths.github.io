@@ -563,12 +563,21 @@ footer a:hover,footer a:focus-visible{border-bottom-color:var(--copper)}
 /* El remate de la oferta, justo encima del botón */
 .oferta-remate{margin:1rem 0 0;color:var(--muted);font-size:.95rem}
 
-/* La foto de progreso del cliente */
+/* Las fotos de progreso: una al lado de la otra, también en el móvil */
 .resultado{margin:0;text-align:center}
+.resultados{
+  display:grid;grid-template-columns:1fr 1fr;gap:.6rem;
+  max-width:420px;margin:0 auto;
+}
+/* Aquí el <picture> es hijo directo de la cuadrícula: con display:contents su
+   <source> ocupaba una celda vacía y empujaba las fotos a la segunda columna. */
+.resultados picture{display:block}
 .resultado img{
-  display:block;margin:0 auto;
-  width:min(100%,330px);height:auto;
+  display:block;width:100%;height:auto;
   border:1px solid var(--rule-strong);border-radius:9px;
+}
+@media (min-width:62rem){
+  .resultados{max-width:560px;gap:1rem}
 }
 .resultado figcaption{
   margin-top:.7rem;
@@ -1225,9 +1234,13 @@ main{counter-reset:seccion}
   <!-- ── 5b. Y los resultados ── -->
   <h2 class="shead"><span class="tag">Y sí, los resultados también hablan</span></h2>
   <figure class="resultado">
-    <picture><source srcset="res1.webp" type="image/webp"><img src="res1.jpg" width="660" height="1115" loading="lazy" decoding="async"
-         alt="Cliente de BAUTRUTHS, antes y después: de 74 kg a 82 kg"></picture>
-    <figcaption>Cliente de BAUTRUTHS, entrenando conmigo. Publicada con su permiso.</figcaption>
+    <div class="resultados">
+      <picture><source srcset="res1.webp" type="image/webp"><img src="res1.jpg" width="660" height="1115" loading="lazy" decoding="async"
+           alt="Cliente de BAUTRUTHS, antes y después: de 74 kg a 82 kg"></picture>
+      <picture><source srcset="res2.webp" type="image/webp"><img src="res2.jpg" width="660" height="1143" loading="lazy" decoding="async"
+           alt="Otro cliente de BAUTRUTHS, antes y después: de 70 kg a 83 kg"></picture>
+    </div>
+    <figcaption>Clientes de BAUTRUTHS, entrenando conmigo. Publicadas con su permiso.</figcaption>
   </figure>
 
   <!-- ── 6. El filtro ── -->
