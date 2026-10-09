@@ -910,6 +910,13 @@ body{
 /* Las imágenes van dentro de <picture>: que el envoltorio no rompa las cajas */
 picture{display:contents}
 
+/* Quien viene del anuncio ve una entrada más corta: fuera el párrafo largo y
+   los tres "sin", que son para leer, y el vídeo asoma sin bajar. */
+.desde-anuncio .thesis p.lead,
+.desde-anuncio .thesis .sin{display:none}
+.desde-anuncio .thesis{padding-bottom:1.4rem}
+.desde-anuncio #cab-video{margin-top:1.6rem}
+
 /* La barra fija lleva su cara al lado del botón: se parece más a un chat con
    una persona que a un anuncio. Era el botón con menos toques del contador. */
 .barra{display:flex;align-items:center;gap:.7rem}
@@ -1113,9 +1120,9 @@ main{counter-reset:seccion}
 
   <!-- ── 2b. El vídeo. La portada es un fotograma propio: YouTube no se carga
        (ni sabe quién mira) hasta que alguien pulsa el play. ── -->
-  <h2 class="shead"><span class="tag">Te enseño cómo funciona</span></h2>
-  <p class="bloque-lead">En menos de dos minutos ves qué hago por ti, cómo funciona la aplicación y cómo conseguimos que cada sesión tenga un propósito.</p>
-  <div class="video">
+  <h2 class="shead" id="cab-video"><span class="tag">Te enseño cómo funciona</span></h2>
+  <p class="bloque-lead" id="lead-video">En menos de dos minutos ves qué hago por ti, cómo funciona la aplicación y cómo conseguimos que cada sesión tenga un propósito.</p>
+  <div class="video" id="caja-video">
     <button type="button" class="video-play" id="ver-video">
       <picture><source srcset="video-portada.webp" type="image/webp"><img src="video-portada.jpg" width="660" height="1173" loading="lazy" decoding="async"
            alt="Samuel explicando en vídeo cómo funciona entrenar con BAUTRUTHS"></picture>
@@ -1391,6 +1398,22 @@ window.goatcounter = { no_onload: true };
 })();
 
 contar("visita", false);
+
+// ── Quien llega desde el anuncio viene de ver un vídeo, no de leer: el 09/10
+//    el contador decía que 9 de cada 10 se iban sin bajar ni una pantalla.
+//    A esa gente se le pone el vídeo nada más entrar, antes de los textos.
+if (ORIGEN === "anuncio" || ORIGEN.indexOf("anuncio") === 0) {
+  const cab = document.getElementById("cab-video");
+  const lead = document.getElementById("lead-video");
+  const caja = document.getElementById("caja-video");
+  const franja = document.querySelector(".specs");
+  if (cab && lead && caja && franja) {
+    document.body.classList.add("desde-anuncio");
+    franja.before(cab, lead, caja);
+    lead.textContent = "Vienes de mi vídeo. Aquí lo tienes entero: en menos de dos minutos ves qué hago por ti y cómo funciona la app.";
+    contar("video-arriba", true);
+  }
+}
 
 // Toques en los botones de WhatsApp y en las otras vías.
 // Cada botón lleva su data-sitio, así que en el panel se ve cuál convierte.
