@@ -910,12 +910,24 @@ body{
 /* Las imágenes van dentro de <picture>: que el envoltorio no rompa las cajas */
 picture{display:contents}
 
-/* Quien viene del anuncio ve una entrada más corta: fuera el párrafo largo y
-   los tres "sin", que son para leer, y el vídeo asoma sin bajar. */
-.desde-anuncio .thesis p.lead,
+/* Quien viene del anuncio ve una entrada más corta: fuera los tres "sin" y el
+   vídeo asoma sin bajar. El párrafo de "para quién es" se queda: el 12/10 se vio
+   que sin él la entrada era un eslogan suelto y 9 de cada 10 se iban. */
 .desde-anuncio .thesis .sin{display:none}
 .desde-anuncio .thesis{padding-bottom:1.4rem}
 .desde-anuncio #cab-video{margin-top:1.6rem}
+/* El titular repite el gancho del anuncio: es una frase, no un eslogan, así que va más pequeño */
+.desde-anuncio .thesis h1.gancho{font-size:clamp(1.55rem,7vw,2.3rem);line-height:1.04}
+.desde-anuncio .thesis .firma{
+  margin:.55rem 0 0;font-family:"Archivo",system-ui,sans-serif;
+  font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);
+}
+/* Paso suave para quien aún no quiere escribir: ver primero cómo funciona */
+.desde-anuncio .thesis .suave{
+  display:block;margin:.85rem 0 0;text-align:center;
+  font-family:"Archivo",system-ui,sans-serif;font-size:.9rem;
+  color:var(--text);text-decoration:underline;text-underline-offset:3px;
+}
 
 /* La barra fija lleva su cara al lado del botón: se parece más a un chat con
    una persona que a un anuncio. Era el botón con menos toques del contador. */
@@ -1402,6 +1414,17 @@ contar("visita", false);
 // ── Quien llega desde el anuncio viene de ver un vídeo, no de leer: el 09/10
 //    el contador decía que 9 de cada 10 se iban sin bajar ni una pantalla.
 //    A esa gente se le pone el vídeo nada más entrar, antes de los textos.
+// ── 12/10: el anuncio prometía una cosa y la web abría con otra. Ahora el
+//    titular repite el gancho del anuncio que trae a cada visita, se ve para
+//    quién es, hay una frase real de un cliente arriba, un paso suave (ver
+//    cómo funciona) y los testimonios suben justo detrás del vídeo.
+//    Cada anuncio nuevo: añadir su gancho aquí y usar el enlace ?a=NOMBRE.
+const GANCHOS = {
+  "anuncio":       "Entrenar online no debería ser recibir una rutina y desaparecer.",
+  "anuncio-ret":   "Entrenar online no debería ser recibir una rutina y desaparecer.",
+  "anuncio-frio":  "¿Tienes poco tiempo para entrenar? Esto es para ti."
+};
+
 if (ORIGEN === "anuncio" || ORIGEN.indexOf("anuncio") === 0) {
   const cab = document.getElementById("cab-video");
   const lead = document.getElementById("lead-video");
@@ -1409,8 +1432,50 @@ if (ORIGEN === "anuncio" || ORIGEN.indexOf("anuncio") === 0) {
   const franja = document.querySelector(".specs");
   if (cab && lead && caja && franja) {
     document.body.classList.add("desde-anuncio");
+
+    // Titular = gancho del anuncio; el lema queda debajo, pequeño.
+    const h1 = document.querySelector(".thesis h1");
+    const gancho = GANCHOS[ORIGEN] || GANCHOS["anuncio"];
+    if (h1 && gancho) {
+      h1.textContent = gancho;
+      h1.classList.add("gancho");
+      const firma = document.createElement("p");
+      firma.className = "firma";
+      firma.textContent = "Entrena mejor. No más.";
+      h1.after(firma);
+    }
+
+    // Debajo del botón: una frase real de un cliente y el paso suave.
+    const nota = document.querySelector(".thesis .cta-note");
+    if (nota) {
+      const cita = document.createElement("p");
+      cita.className = "cita";
+      cita.textContent = "«Muchísimas gracias, de verdad que sin ti dudo que lo hubiera conseguido.»";
+      const quien = document.createElement("span");
+      quien.textContent = "Cliente de BAUTRUTHS · conversación real";
+      cita.appendChild(quien);
+      const suave = document.createElement("a");
+      suave.className = "suave";
+      suave.href = "#cab-video";
+      suave.dataset.contar = "ver-como-funciona";
+      suave.textContent = "¿Prefieres verlo antes? Mira cómo funciona en 2 minutos ↓";
+      nota.after(suave, cita);
+    }
+
     franja.before(cab, lead, caja);
-    lead.textContent = "Vienes de mi vídeo. Aquí lo tienes entero: en menos de dos minutos ves qué hago por ti y cómo funciona la app.";
+    lead.textContent = "En menos de dos minutos ves qué hago por ti y cómo funciona la app.";
+
+    // Los testimonios suben justo detrás del vídeo (en la versión normal están en la pantalla 10).
+    const charlas = document.querySelector(".charlas");
+    if (charlas) {
+      const titulo = charlas.previousElementSibling && charlas.previousElementSibling.previousElementSibling;
+      const intro = charlas.previousElementSibling;
+      const notaPruebas = charlas.nextElementSibling;
+      const bloque = [titulo, intro, charlas, notaPruebas].filter(function (el) {
+        return el && (el === charlas || el.matches("h2.shead, p.bloque-lead, p.pruebas-nota"));
+      });
+      franja.before.apply(franja, bloque);
+    }
     contar("video-arriba", true);
   }
 }
@@ -1422,6 +1487,8 @@ document.addEventListener("click", function (e) {
   if (!a) return;
   if (a.hasAttribute("data-wa")) {
     contar("whatsapp-" + (a.dataset.sitio || "barra"));
+  } else if (a.dataset.contar) {
+    contar(a.dataset.contar);
   } else if (a.href.indexOf("ig.me") > -1) {
     contar("instagram-dm");
   } else if (a.href.indexOf("jotform") > -1) {
